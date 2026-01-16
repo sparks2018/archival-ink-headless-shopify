@@ -313,7 +313,7 @@ export default function Header() {
                   key={item.name}
                   variant="ghost"
                   className="text-white/80 hover:text-white hover:bg-white/10 justify-start text-sm tracking-widest uppercase"
-                  onClick={() => handleNavClick(item.href, item.isScrollLink)}
+                  onClick={() => handleNavClick(item.href, item.isScrollLink, item.isLink)}
                 >
                   {item.name}
                 </Button>
