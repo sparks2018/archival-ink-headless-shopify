@@ -234,42 +234,29 @@ export default function AllArtists() {
     <section id="artists" className="py-20 relative">
       <div className="container">
         {/* Breadcrumb */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
+        <div className="mb-8 animate-fade-in">
           <span className="text-gray-600 text-sm">
             <Link href="/" className="hover:text-gray-900 transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-gray-900">Collections</span>
           </span>
-        </motion.div>
+        </div>
 
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-wide">
             ALL ARTISTS
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full" />
-        </motion.div>
+        </div>
 
         {/* Artist Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {artistCollections.map((artist, index) => (
-            <motion.div
+          {artistCollections.map((artist) => (
+            <div
               key={artist.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${Math.random() * 0.3}s` }}
             >
               <Link href={`/artist/${artist.slug}`}>
                 <div className="group cursor-pointer">
@@ -299,7 +286,7 @@ export default function AllArtists() {
                   </h3>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
