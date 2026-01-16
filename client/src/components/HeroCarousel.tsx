@@ -2,34 +2,73 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import { useLocation } from "wouter";
 
 interface HeroCarouselProps {
   onSlideChange?: () => void;
 }
 
+interface HeroSlide {
+  id: string;
+  title: string;
+  artist: string;
+  artistSlug: string;
+  image: string;
+  category: string;
+}
+
+// Static hero slides with high-resolution images
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: "1",
+    title: "Apotheosis of Hope 1",
+    artist: "Michael Divine",
+    artistSlug: "michael-divine",
+    image: "/hero-images/Apotheosis-of-Hope-1-michaeldivine.jpg",
+    category: "Visionary Art"
+  },
+  {
+    id: "2",
+    title: "Golden Lion",
+    artist: "Luke Brown",
+    artistSlug: "luke-brown",
+    image: "/hero-images/lukebrown.jpg",
+    category: "Psychedelic Art"
+  },
+  {
+    id: "3",
+    title: "Bicycle Day",
+    artist: "Alex Grey",
+    artistSlug: "alex-grey",
+    image: "/hero-images/alex-grey-3.jpg",
+    category: "Visionary Art"
+  },
+  {
+    id: "4",
+    title: "Divine Feminine",
+    artist: "Christopher Pugliese",
+    artistSlug: "christopher-pugliese",
+    image: "/hero-images/Christopher-Pugliese.jpg",
+    category: "Visionary Art"
+  }
+];
+
 export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
-  const { artworks } = useShopifyProducts();
   const [, setLocation] = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  // Get featured artworks for hero (first 4 artworks)
-  // FIXED: Added optional chaining and fallback to handle undefined artworks
-  const heroSlides = artworks?.slice(0, 4) || [];
+  const heroSlides = HERO_SLIDES;
 
   const nextSlide = useCallback(() => {
-    if (heroSlides.length === 0) return;
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     onSlideChange?.();
   }, [heroSlides.length, onSlideChange]);
 
   const prevSlide = useCallback(() => {
-    if (heroSlides.length === 0) return;
     setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
     onSlideChange?.();
@@ -69,10 +108,9 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
 
   // Auto-rotation every 8 seconds
   useEffect(() => {
-    if (heroSlides.length === 0) return;
     const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
-  }, [nextSlide, heroSlides.length]);
+  }, [nextSlide]);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -94,27 +132,16 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
     }),
   };
 
-  if (heroSlides.length === 0) {
-    return (
-      <section className="relative h-screen w-full overflow-hidden pt-28">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="text-white text-lg">Loading...</p>
-        </div>
-      </section>
-    );
-  }
-
   const currentSlideData = heroSlides[currentSlide];
 
   const handleExploreClick = () => {
-    // Navigate to gallery page
-    setLocation('/gallery');
+    // Navigate to the artist's collection page
+    setLocation(`/artist/${currentSlideData.artistSlug}`);
   };
 
-  const handleViewArtistClick = () => {
-    // Navigate to the artist's page
-    const artistSlug = currentSlideData.artist.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    setLocation(`/artist/${artistSlug}`);
+  const handleViewAllArtistsClick = () => {
+    // Navigate to all artists page
+    setLocation('/artists');
   };
 
   return (
@@ -207,12 +234,12 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                     Explore Collection
                   </Button>
                   <Button
-                    onClick={handleViewArtistClick}
+                    onClick={handleViewAllArtistsClick}
                     size="default"
                     variant="outline"
                     className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-md px-6 py-3 text-sm rounded-full"
                   >
-                    View Artist
+                    View All Artists
                   </Button>
                 </motion.div>
               </motion.div>
