@@ -18,7 +18,7 @@ import CartSidebar from "@/components/CartSidebar";
 
 const navItems = [
   { name: "Home", href: "/", isLink: true },
-  { name: "The Artists", href: "/artists", hasDropdown: true, isLink: true },
+  { name: "The Artists", href: "/artists", hasDropdown: false, isLink: true },
   { name: "Gallery", href: "/gallery", isLink: true },
   { name: "Contact", href: "/contact", isLink: true },
   { name: "Submit Art", href: "/submit-art", isLink: true },
