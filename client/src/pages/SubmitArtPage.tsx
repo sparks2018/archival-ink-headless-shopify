@@ -62,7 +62,7 @@ export default function SubmitArtPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 bg-gradient-to-b from-purple-900/20 to-transparent">
+      <section className="relative pt-32 pb-20 px-4 bg-gradient-to-b from-purple-900/30 via-purple-800/20 to-white">
         <div className="container max-w-4xl text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-purple-600/20 mb-6">
             <Upload className="w-10 h-10 text-purple-400" />
@@ -77,15 +77,15 @@ export default function SubmitArtPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-white">
         <div className="container max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-600/20 mb-4">
                 <Globe className="w-8 h-8 text-purple-400" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Global Exposure</h3>
-              <p className="text-gray-400">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Global Exposure</h3>
+              <p className="text-gray-600">
                 Reach collectors worldwide through our established platform and marketing channels.
               </p>
             </div>
@@ -94,8 +94,8 @@ export default function SubmitArtPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-600/20 mb-4">
                 <Users className="w-8 h-8 text-purple-400" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Artist Community</h3>
-              <p className="text-gray-400">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Artist Community</h3>
+              <p className="text-gray-600">
                 Join a community of visionary artists including Alex Grey, Android Jones, and more.
               </p>
             </div>
@@ -104,8 +104,8 @@ export default function SubmitArtPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-600/20 mb-4">
                 <Star className="w-8 h-8 text-purple-400" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Premium Representation</h3>
-              <p className="text-gray-400">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Premium Representation</h3>
+              <p className="text-gray-600">
                 Professional presentation, high-quality printing, and dedicated artist support.
               </p>
             </div>
@@ -114,11 +114,11 @@ export default function SubmitArtPage() {
       </section>
 
       {/* Application Form */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-white">
         <div className="container max-w-4xl">
-          <div className="bg-gray-900 rounded-2xl p-8 md:p-12 border border-white/10">
-            <h2 className="text-3xl font-bold text-white mb-2">Artist Application</h2>
-            <p className="text-gray-400 mb-8">
+          <div className="bg-gray-50 rounded-2xl p-8 md:p-12 border border-gray-200">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Artist Application</h2>
+            <p className="text-gray-600 mb-8">
               Fill out the form below to submit your work for consideration. Fields marked with * are required.
             </p>
 
@@ -129,12 +129,12 @@ export default function SubmitArtPage() {
                   <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
                     1
                   </div>
-                  <h3 className="text-xl font-bold text-white">Basic Information</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Basic Information</h3>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Artist Name *
                     </label>
                     <input
@@ -143,13 +143,13 @@ export default function SubmitArtPage() {
                       value={formData.artistName}
                       onChange={handleChange}
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                       placeholder="Your artist name"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Email *
                     </label>
                     <input
@@ -158,14 +158,14 @@ export default function SubmitArtPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Phone (Optional)
                   </label>
                   <input
@@ -173,7 +173,7 @@ export default function SubmitArtPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
@@ -185,12 +185,12 @@ export default function SubmitArtPage() {
                   <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
                     2
                   </div>
-                  <h3 className="text-xl font-bold text-white">Online Presence</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Online Presence</h3>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Website
                     </label>
                     <input
@@ -198,13 +198,13 @@ export default function SubmitArtPage() {
                       name="website"
                       value={formData.website}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                       placeholder="https://yourwebsite.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Instagram
                     </label>
                     <input
@@ -212,14 +212,14 @@ export default function SubmitArtPage() {
                       name="instagram"
                       value={formData.instagram}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                       placeholder="@yourusername"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Portfolio Link *
                   </label>
                   <input
@@ -228,7 +228,7 @@ export default function SubmitArtPage() {
                     value={formData.portfolioLink}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="Link to your portfolio (Behance, ArtStation, Google Drive, etc.)"
                   />
                   <p className="text-sm text-gray-500 mt-2">
@@ -243,19 +243,19 @@ export default function SubmitArtPage() {
                   <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
                     3
                   </div>
-                  <h3 className="text-xl font-bold text-white">About Your Art</h3>
+                  <h3 className="text-xl font-bold text-gray-900">About Your Art</h3>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Art Style/Medium
                     </label>
                     <select
                       name="artStyle"
                       value={formData.artStyle}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     >
                       <option value="">Select your primary style</option>
                       <option value="visionary">Visionary Art</option>
@@ -270,14 +270,14 @@ export default function SubmitArtPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Years of Experience
                     </label>
                     <select
                       name="yearsExperience"
                       value={formData.yearsExperience}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     >
                       <option value="">Select experience level</option>
                       <option value="1-3">1-3 years</option>
@@ -289,7 +289,7 @@ export default function SubmitArtPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Artist Bio *
                   </label>
                   <textarea
@@ -298,13 +298,13 @@ export default function SubmitArtPage() {
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
                     placeholder="Tell us about yourself and your artistic journey..."
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Artist Statement
                   </label>
                   <textarea
@@ -312,7 +312,7 @@ export default function SubmitArtPage() {
                     value={formData.artistStatement}
                     onChange={handleChange}
                     rows={4}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
                     placeholder="Describe your artistic vision, themes, and what inspires your work..."
                   />
                 </div>
@@ -324,25 +324,25 @@ export default function SubmitArtPage() {
                   <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
                     4
                   </div>
-                  <h3 className="text-xl font-bold text-white">Terms & Agreement</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Terms & Agreement</h3>
                 </div>
 
-                <div className="bg-white/5 border border-white/10 rounded-lg p-6 space-y-4">
+                <div className="bg-white border border-gray-300 rounded-lg p-6 space-y-4">
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
                       name="agreeTerms"
                       checked={formData.agreeTerms}
                       onChange={handleChange}
-                      className="mt-1 w-5 h-5 rounded border-white/20 bg-white/5 text-purple-600 focus:ring-2 focus:ring-purple-500"
+                      className="mt-1 w-5 h-5 rounded border-gray-300 bg-white text-purple-600 focus:ring-2 focus:ring-purple-500"
                     />
-                    <span className="text-sm text-gray-300">
+                    <span className="text-sm text-gray-700">
                       I agree to the terms and conditions of Archival Ink Gallery. I confirm that all submitted work is 
                       original and I hold the rights to it.
                     </span>
                   </label>
 
-                  <p className="text-sm text-gray-400 pl-8">
+                  <p className="text-sm text-gray-600 pl-8">
                     I understand that if accepted, Archival Ink Gallery may request exclusive representation for certain works.
                   </p>
                 </div>
@@ -355,7 +355,7 @@ export default function SubmitArtPage() {
                 Submit Application
               </Button>
 
-              <p className="text-center text-sm text-gray-400">
+              <p className="text-center text-sm text-gray-600">
                 Applications are reviewed within 3-5 weeks. We'll contact you via email with our decision.
               </p>
             </form>

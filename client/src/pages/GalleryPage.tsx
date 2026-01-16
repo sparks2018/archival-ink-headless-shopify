@@ -158,10 +158,10 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
 
-      <main className="flex-1 relative z-10 pt-24">
+      <main className="flex-1 relative z-10 pt-24 bg-white">
         <div className="container mx-auto px-4 py-12">
           {/* Hero Section */}
           <motion.div
@@ -169,10 +169,10 @@ export default function GalleryPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="font-playfair text-5xl md:text-6xl font-bold text-gray-900 mb-4">
               Discover Your Next <span className="text-gradient">Obsession</span>
             </h1>
-            <p className="text-white/60 text-lg">
+            <p className="text-gray-600 text-lg">
               Browse curated artworks from visionary artists worldwide
             </p>
           </motion.div>
@@ -185,13 +185,13 @@ export default function GalleryPage() {
             className="max-w-2xl mx-auto mb-8"
           >
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input
                 type="text"
                 placeholder="Search artworks or artists..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-14 bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-purple-500"
+                className="pl-12 h-14 bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-purple-500"
               />
             </div>
           </motion.div>
@@ -204,7 +204,7 @@ export default function GalleryPage() {
             className="mb-6"
           >
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-white/60 text-sm font-medium">Format:</span>
+              <span className="text-gray-600 text-sm font-medium">Format:</span>
             </div>
             <div className="flex flex-wrap gap-3">
               {PRODUCT_TYPE_CATEGORIES.map((category) => (
@@ -214,7 +214,7 @@ export default function GalleryPage() {
                   className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                     selectedProductType === category.value
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50"
-                      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   {category.label}
@@ -236,7 +236,7 @@ export default function GalleryPage() {
             className="mb-8"
           >
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-white/60 text-sm font-medium">Theme:</span>
+              <span className="text-gray-600 text-sm font-medium">Theme:</span>
             </div>
             <div className="flex flex-wrap gap-3">
               {THEMATIC_CATEGORIES.map((category) => (
@@ -246,7 +246,7 @@ export default function GalleryPage() {
                   className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                     selectedThematicCategory === category.id
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50"
-                      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   {category.label}
@@ -272,8 +272,8 @@ export default function GalleryPage() {
                 onClick={() => setSortMode("browse")}
                 className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${
                   sortMode === "browse"
-                    ? "bg-white/10 text-white"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-gray-200 text-gray-900"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >
                 <Grid className="w-4 h-4" />
@@ -283,8 +283,8 @@ export default function GalleryPage() {
                 onClick={() => setSortMode("trending")}
                 className={`px-4 py-2 rounded-lg transition-all ${
                   sortMode === "trending"
-                    ? "bg-white/10 text-white"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-gray-200 text-gray-900"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >
                 Trending
@@ -293,8 +293,8 @@ export default function GalleryPage() {
                 onClick={() => setSortMode("featured")}
                 className={`px-4 py-2 rounded-lg transition-all ${
                   sortMode === "featured"
-                    ? "bg-white/10 text-white"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-gray-200 text-gray-900"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >
                 Featured
@@ -303,8 +303,8 @@ export default function GalleryPage() {
                 onClick={() => setSortMode("for-you")}
                 className={`px-4 py-2 rounded-lg transition-all ${
                   sortMode === "for-you"
-                    ? "bg-white/10 text-white"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "bg-gray-200 text-gray-900"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >
                 For You
@@ -314,7 +314,7 @@ export default function GalleryPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="p-2 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white transition-all"
+                className="p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-all"
               >
                 <SlidersHorizontal className="w-5 h-5" />
               </button>
@@ -322,8 +322,8 @@ export default function GalleryPage() {
                 onClick={() => setViewMode("grid")}
                 className={`p-2 rounded-lg transition-all ${
                   viewMode === "grid"
-                    ? "bg-white/10 text-white"
-                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                    ? "bg-gray-200 text-gray-900"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                 }`}
               >
                 <Grid className="w-5 h-5" />
@@ -332,8 +332,8 @@ export default function GalleryPage() {
                 onClick={() => setViewMode("list")}
                 className={`p-2 rounded-lg transition-all ${
                   viewMode === "list"
-                    ? "bg-white/10 text-white"
-                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                    ? "bg-gray-200 text-gray-900"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                 }`}
               >
                 <List className="w-5 h-5" />
@@ -351,9 +351,9 @@ export default function GalleryPage() {
                   exit={{ opacity: 0, x: -20 }}
                   className="w-64 flex-shrink-0"
                 >
-                  <div className="glass-card rounded-2xl p-6 sticky top-24">
+                  <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 sticky top-24">
                     <div className="flex items-center justify-between mb-6">
-                      <h3 className="text-white font-semibold">Filters</h3>
+                      <h3 className="text-gray-900 font-semibold">Filters</h3>
                       <button
                         onClick={clearAllFilters}
                         className="text-purple-400 text-sm hover:text-purple-300 transition-colors"
@@ -365,7 +365,7 @@ export default function GalleryPage() {
                     {/* Price Range */}
                     <div className="mb-6">
                       <button
-                        className="flex items-center justify-between w-full mb-4 text-white/80 hover:text-white transition-colors"
+                        className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
                       >
                         <span className="font-medium">Price Range</span>
                         <span className="text-sm">▼</span>
@@ -377,38 +377,38 @@ export default function GalleryPage() {
                         step={50}
                         className="mb-4"
                       />
-                      <div className="flex items-center justify-between text-sm text-white/60">
+                      <div className="flex items-center justify-between text-sm text-gray-600">
                         <span>${priceRange[0]}</span>
                         <span>${priceRange[1]}</span>
                       </div>
                       <div className="grid grid-cols-2 gap-2 mt-4">
                         <button
                           onClick={() => setPriceRange([0, 100])}
-                          className="px-3 py-1.5 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white text-xs transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
                         >
                           Under $100
                         </button>
                         <button
                           onClick={() => setPriceRange([100, 300])}
-                          className="px-3 py-1.5 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white text-xs transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
                         >
                           $100 - $300
                         </button>
                         <button
                           onClick={() => setPriceRange([300, 500])}
-                          className="px-3 py-1.5 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white text-xs transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
                         >
                           $300 - $500
                         </button>
                         <button
                           onClick={() => setPriceRange([500, 1000])}
-                          className="px-3 py-1.5 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white text-xs transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
                         >
                           $500 - $1,000
                         </button>
                         <button
                           onClick={() => setPriceRange([1000, 2000])}
-                          className="px-3 py-1.5 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white text-xs col-span-2 transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs col-span-2 transition-all"
                         >
                           Over $1,000
                         </button>
@@ -418,7 +418,7 @@ export default function GalleryPage() {
                     {/* Artist Filter */}
                     <div className="mb-6">
                       <button
-                        className="flex items-center justify-between w-full mb-4 text-white/80 hover:text-white transition-colors"
+                        className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
                       >
                         <span className="font-medium">Artist</span>
                         <span className="text-sm">▼</span>
@@ -432,9 +432,9 @@ export default function GalleryPage() {
                             <Checkbox
                               checked={selectedArtists.includes(artist)}
                               onCheckedChange={() => handleArtistToggle(artist)}
-                              className="border-white/20"
+                              className="border-gray-300"
                             />
-                            <span className="text-white/70 group-hover:text-white transition-colors text-sm">
+                            <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm">
                               {artist}
                             </span>
                           </label>
@@ -445,7 +445,7 @@ export default function GalleryPage() {
                     {/* Medium Filter */}
                     <div>
                       <button
-                        className="flex items-center justify-between w-full mb-4 text-white/80 hover:text-white transition-colors"
+                        className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
                       >
                         <span className="font-medium">Medium</span>
                         <span className="text-sm">▼</span>
@@ -459,9 +459,9 @@ export default function GalleryPage() {
                             <Checkbox
                               checked={selectedMediums.includes(medium)}
                               onCheckedChange={() => handleMediumToggle(medium)}
-                              className="border-white/20"
+                              className="border-gray-300"
                             />
-                            <span className="text-white/70 group-hover:text-white transition-colors text-sm">
+                            <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm">
                               {medium}
                             </span>
                           </label>
@@ -476,8 +476,8 @@ export default function GalleryPage() {
             {/* Artwork Grid */}
             <div className="flex-1">
               <div className="mb-6">
-                <p className="text-white/60">
-                  <span className="text-white font-semibold">
+                <p className="text-gray-600">
+                  <span className="text-gray-900 font-semibold"
                     {filteredArtworks.length}
                   </span>{" "}
                   artworks found
@@ -490,7 +490,7 @@ export default function GalleryPage() {
                 </div>
               ) : filteredArtworks.length === 0 ? (
                 <div className="text-center py-20">
-                  <p className="text-white/60 text-lg mb-4">
+                  <p className="text-gray-600 text-lg mb-4">
                     No artworks found matching your filters
                   </p>
                   <button
@@ -519,6 +519,7 @@ export default function GalleryPage() {
                         artwork={artwork}
                         onClick={() => setSelectedArtwork(artwork)}
                         aspectRatio="portrait"
+                        theme="light"
                       />
                     </motion.div>
                   ))}
