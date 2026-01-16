@@ -120,7 +120,7 @@ export default function Home() {
       const timer = setTimeout(checkAndOpenArtwork, 500);
       return () => clearTimeout(timer);
     }
-  }, [artworkParam, trendingArtworks, highestValueArtworks, alexGreyArtworks, lukeBrownArtworks, hansHaveronArtworks, johnParkArtworks, mearOneArtworks, michaelDivineArtworks, androidJonesArtworks, chrisDyerArtworks, mars1Artworks, vanSaroArtworks, selectedArtwork]);
+  }, [trendingArtworks, highestValueArtworks, alexGreyArtworks, lukeBrownArtworks, hansHaveronArtworks, johnParkArtworks, mearOneArtworks, michaelDivineArtworks, androidJonesArtworks, chrisDyerArtworks, mars1Artworks, vanSaroArtworks, selectedArtwork]);
 
   // Load artworks from Shopify API
   useEffect(() => {
