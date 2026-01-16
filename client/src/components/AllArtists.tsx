@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+// Removed framer-motion to fix React error #185
 import { Link } from "wouter";
 
 interface ArtistCollection {
@@ -262,12 +262,10 @@ export default function AllArtists() {
                 <div className="group cursor-pointer">
                   {/* Image Container */}
                   <div className="relative aspect-square overflow-hidden rounded-lg mb-4 shadow-lg">
-                    <motion.img
+                    <img
                       src={artist.image}
                       alt={artist.name}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.4 }}
+                      className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
                     />
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
