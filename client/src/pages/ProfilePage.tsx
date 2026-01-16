@@ -56,6 +56,7 @@ const mockActivities: ActivityItem[] = [
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<Tab>("activity");
+  const [isLoggedIn] = useState(false); // TODO: Replace with actual auth check
 
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -111,7 +112,7 @@ export default function ProfilePage() {
       <StarField />
       <Header />
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 relative">
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 relative mt-20">
         <div className="container py-16">
           <div className="flex items-start gap-8">
             {/* Avatar */}
@@ -242,6 +243,20 @@ export default function ProfilePage() {
 
       {/* Content */}
       <div className="container py-12">
+        {!isLoggedIn ? (
+          <div className="max-w-3xl mx-auto text-center py-16">
+            <div className="bg-gray-900 rounded-xl p-12 border border-white/10">
+              <h2 className="text-3xl font-bold text-white mb-4">Please Log In</h2>
+              <p className="text-gray-400 text-lg mb-8">
+                You need to log in to view your profile, leave comments, and customize your data.
+              </p>
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 text-lg">
+                Log In / Sign Up
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <>
         {activeTab === "activity" && (
           <div className="max-w-3xl">
             <div className="space-y-4">
@@ -287,6 +302,8 @@ export default function ProfilePage() {
             <h3 className="text-xl font-semibold text-white mb-2">Not following anyone yet</h3>
             <p className="text-gray-400">Follow artists to see their latest works</p>
           </div>
+        )}
+          </>
         )}
 
         {activeTab === "settings" && (
