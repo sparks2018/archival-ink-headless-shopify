@@ -43,7 +43,7 @@ export default function StarField() {
           transition={{
             duration: star.duration,
             delay: star.delay,
-            repeat: Infinity,
+            repeat: 2, // Only animate 3 times total (initial + 2 repeats)
             ease: "easeInOut",
           }}
         />

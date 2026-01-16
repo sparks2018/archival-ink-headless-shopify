@@ -32,13 +32,13 @@ export default function FeaturedArtist({ onViewDetail }: FeaturedArtistProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-xs tracking-widest uppercase text-purple-400 mb-2 block">
+          <span className="text-xs tracking-widest uppercase text-purple-600 mb-2 block">
             Featured Artist
           </span>
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Alex Grey
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Explore the visionary works of one of the most influential contemporary artists
           </p>
         </motion.div>
@@ -53,7 +53,7 @@ export default function FeaturedArtist({ onViewDetail }: FeaturedArtistProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
             >
-              <ArtworkCard artwork={artwork} onViewDetail={onViewDetail} aspectRatio="portrait" />
+              <ArtworkCard artwork={artwork} onViewDetail={onViewDetail} aspectRatio="portrait" theme="light" />
             </motion.div>
           ))}
         </div>

@@ -160,7 +160,7 @@ export default function Header() {
                     </Button>
                     {showArtistsDropdown && (
                       <div 
-                        className="absolute top-full left-0 mt-2 glass-card border border-white/10 min-w-[200px] max-h-[400px] overflow-y-auto rounded-lg shadow-xl z-50"
+                        className="absolute top-full left-0 mt-0 glass-card border border-white/10 min-w-[200px] max-h-[70vh] overflow-y-auto rounded-lg shadow-xl z-50"
                         onMouseEnter={() => setShowArtistsDropdown(true)}
                         onMouseLeave={() => setShowArtistsDropdown(false)}
                       >

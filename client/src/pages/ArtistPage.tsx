@@ -194,43 +194,41 @@ export default function ArtistPage() {
       <StarField />
       <Header />
 
-      {/* Artist Hero Section */}
+      {/* Artist Hero Banner - Simplified */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${artistInfo.bannerImage})` }}
         />
-        {/* Dark overlay removed per user request - using drop shadows on text instead */}
         
         <div className="container relative z-10">
+          {/* Breadcrumb on banner */}
+          <div className="flex items-center gap-2 text-sm text-white/80 mb-8">
+            <Link href="/" className="hover:text-white transition-colors" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
+              Home
+            </Link>
+            <span style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>/</span>
+            <Link href="/artists" className="hover:text-white transition-colors" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
+              Artists
+            </Link>
+            <span style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>/</span>
+            <span className="text-white" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>{artistInfo.name}</span>
+          </div>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <p className="text-purple-400 uppercase tracking-widest text-sm mb-4" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>Featured Artist</p>
-            <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-8" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.9)' }}>
+            <h1 className="font-playfair text-5xl md:text-7xl font-bold" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.9)' }}>
               {artistInfo.name}
             </h1>
-            <p className="text-white/90 text-lg leading-relaxed" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-              {artistInfo.bio}
-            </p>
           </motion.div>
         </div>
       </section>
 
       {/* White Background Section */}
       <div className="bg-white">
-        {/* Breadcrumb */}
-        <div className="container py-6">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-gray-900 transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-gray-900">{artistInfo.name}</span>
-          </div>
-        </div>
 
         {/* Artworks Grid */}
         <section className="container pb-20">
@@ -289,6 +287,18 @@ export default function ArtistPage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* About the Artist Section */}
+      <section className="container pb-20">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-playfair font-bold text-gray-900 mb-6">About the Artist</h2>
+          <div className="prose prose-lg max-w-none">
+            <p className="text-gray-700 leading-relaxed">
+              {artistInfo.bio}
+            </p>
+          </div>
+        </div>
       </section>
       </div>
 
