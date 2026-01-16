@@ -74,7 +74,7 @@ export default function FeaturedArtist({ onViewDetail }: FeaturedArtistProps) {
             }}
             className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
           >
-            Explore Collection
+            All Artists
           </button>
         </motion.div>
       </div>

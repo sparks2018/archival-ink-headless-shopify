@@ -307,7 +307,7 @@ export default function Home() {
         </div>
 
         {/* Three Info Cards Section */}
-        <section className="py-20 relative">
+        <section className="py-20 relative bg-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Flat Rate Shipping */}
@@ -315,7 +315,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 text-center"
+                className="bg-gray-50 rounded-2xl p-8 text-center shadow-lg"
               >
                 <div className="w-20 h-20 mx-auto mb-6 bg-purple-600/20 rounded-full flex items-center justify-center">
                   <svg
@@ -332,10 +332,10 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-white mb-4">
+                <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-4">
                   FLAT RATE SHIPPING
                 </h3>
-                <p className="text-white/70 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed">
                   Your artwork is safely and securely packaged & shipped (Within the U.S. only) for $8.95
                 </p>
               </motion.div>
@@ -346,7 +346,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 text-center"
+                className="bg-gray-50 rounded-2xl p-8 text-center shadow-lg"
               >
                 <div className="w-20 h-20 mx-auto mb-6 bg-purple-600/20 rounded-full flex items-center justify-center">
                   <svg
@@ -363,10 +363,10 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-white mb-4">
+                <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-4">
                   CERTIFICATES OF AUTHENTICITY
                 </h3>
-                <p className="text-white/70 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed">
                   We are an authorized reseller for all of our artist. You will receive signed certificates of authenticity for any print purchased. Through our website.
                 </p>
               </motion.div>
@@ -377,7 +377,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 text-center"
+                className="bg-gray-50 rounded-2xl p-8 text-center shadow-lg"
               >
                 <div className="w-20 h-20 mx-auto mb-6 bg-purple-600/20 rounded-full flex items-center justify-center">
                   <svg
@@ -394,10 +394,10 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-white mb-4">
+                <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-4">
                   NEED ASSISTANCE?
                 </h3>
-                <p className="text-white/70 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed">
                   Got a question about art or a framing style? Contact us anytime and we will gladly do our best to assist you.
                 </p>
               </motion.div>

@@ -195,7 +195,7 @@ export default function ArtistPage() {
       <Header />
 
       {/* Artist Hero Banner - Simplified */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-32 pb-20 overflow-hidden mt-20">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${artistInfo.bannerImage})` }}
@@ -229,6 +229,18 @@ export default function ArtistPage() {
 
       {/* White Background Section */}
       <div className="bg-white">
+
+        {/* About the Artist Section */}
+        <section className="container py-12">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-4">About the Artist</h2>
+            <div className="prose max-w-none">
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {artistInfo.bio}
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Artworks Grid */}
         <section className="container pb-20">
@@ -289,17 +301,7 @@ export default function ArtistPage() {
         )}
       </section>
 
-      {/* About the Artist Section */}
-      <section className="container pb-20">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-playfair font-bold text-gray-900 mb-6">About the Artist</h2>
-          <div className="prose prose-lg max-w-none">
-            <p className="text-gray-700 leading-relaxed">
-              {artistInfo.bio}
-            </p>
-          </div>
-        </div>
-      </section>
+
       </div>
 
       {/* Lightbox */}
