@@ -33,7 +33,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen bg-white">
       <StarField />
       <Header />
 
@@ -44,10 +44,10 @@ export default function ContactPage() {
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-purple-600/20 mb-6">
               <Mail className="w-10 h-10 text-purple-400" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Get in Touch
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Have a question about our collection? Interested in commissioning a piece? 
               We'd love to hear from you.
             </p>
@@ -55,11 +55,11 @@ export default function ContactPage() {
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="bg-gray-900 rounded-2xl p-8 border border-white/10">
-              <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Name *
                   </label>
                   <input
@@ -68,13 +68,13 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="Your name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Email *
                   </label>
                   <input
@@ -83,13 +83,13 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="your@email.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Subject *
                   </label>
                   <input
@@ -98,13 +98,13 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="How can we help?"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Message *
                   </label>
                   <textarea
@@ -113,7 +113,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
                     placeholder="Tell us more about your inquiry..."
                   />
                 </div>
@@ -129,16 +129,16 @@ export default function ContactPage() {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              <div className="bg-gray-900 rounded-2xl p-8 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-purple-600/20 flex items-center justify-center flex-shrink-0">
                       <Mail className="w-6 h-6 text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="text-white font-medium mb-1">Email</h3>
-                      <a href="mailto:info@archivalinkgallery.com" className="text-gray-400 hover:text-purple-400 transition-colors">
+                      <h3 className="text-gray-900 font-medium mb-1">Email</h3>
+                      <a href="mailto:info@archivalinkgallery.com" className="text-gray-600 hover:text-purple-600 transition-colors">
                         info@archivalinkgallery.com
                       </a>
                     </div>
@@ -149,8 +149,8 @@ export default function ContactPage() {
                       <Phone className="w-6 h-6 text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="text-white font-medium mb-1">Phone</h3>
-                      <a href="tel:+14155551234" className="text-gray-400 hover:text-purple-400 transition-colors">
+                      <h3 className="text-gray-900 font-medium mb-1">Phone</h3>
+                      <a href="tel:+14155551234" className="text-gray-600 hover:text-purple-600 transition-colors">
                         +1 (415) 555-1234
                       </a>
                     </div>
@@ -161,8 +161,8 @@ export default function ContactPage() {
                       <MapPin className="w-6 h-6 text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="text-white font-medium mb-1">Location</h3>
-                      <p className="text-gray-400">
+                      <h3 className="text-gray-900 font-medium mb-1">Location</h3>
+                      <p className="text-gray-600">
                         123 Gallery Street<br />
                         San Francisco, CA 94102
                       </p>
@@ -174,8 +174,8 @@ export default function ContactPage() {
                       <Clock className="w-6 h-6 text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="text-white font-medium mb-1">Hours</h3>
-                      <p className="text-gray-400">
+                      <h3 className="text-gray-900 font-medium mb-1">Hours</h3>
+                      <p className="text-gray-600">
                         Tue - Sat: 10am - 7pm<br />
                         Sun - Mon: Closed
                       </p>
@@ -184,9 +184,9 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-gray-900 rounded-2xl p-8 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-4">Visit Our Gallery</h2>
-                <p className="text-gray-400 mb-4">
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Visit Our Gallery</h2>
+                <p className="text-gray-600 mb-4">
                   Experience our collection in person. Schedule a private viewing or stop by during gallery hours.
                 </p>
                 <p className="text-sm text-gray-500">

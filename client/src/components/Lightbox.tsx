@@ -187,14 +187,7 @@ export default function Lightbox({ artwork, onClose, onArtworkChange }: Lightbox
                 >
                   <X className="w-6 h-6 text-white" />
                 </button>
-                {/* Smaller outline button in top right corner */}
-                <button
-                  onClick={onClose}
-                  className="absolute top-4 right-20 p-2 border-2 border-white rounded-full backdrop-blur-sm transition-all hover:bg-white/10 z-50"
-                  aria-label="Close lightbox"
-                >
-                  <X className="w-3 h-3 text-white" />
-                </button>
+
               </div>
 
               <p className="text-center text-gray-400 text-sm mt-4">
@@ -291,8 +284,7 @@ export default function Lightbox({ artwork, onClose, onArtworkChange }: Lightbox
             artistName={artwork.artist} 
             currentArtworkId={artwork.id}
             onArtworkClick={(newArtwork) => {
-              onClose();
-              setTimeout(() => onArtworkChange?.(newArtwork), 100);
+              onArtworkChange?.(newArtwork);
             }}
           />
 
@@ -300,8 +292,7 @@ export default function Lightbox({ artwork, onClose, onArtworkChange }: Lightbox
           <ExploreOtherArtists 
             currentArtist={artwork.artist}
             onArtworkClick={(newArtwork) => {
-              onClose();
-              setTimeout(() => onArtworkChange?.(newArtwork), 100);
+              onArtworkChange?.(newArtwork);
             }}
           />
         </div>

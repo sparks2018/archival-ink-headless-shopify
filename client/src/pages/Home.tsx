@@ -170,14 +170,14 @@ export default function Home() {
         {/* Featured Artist Section - Alex Grey */}
         <FeaturedArtist onViewDetail={handleViewDetail} />
 
-        {/* View Alex Grey Collection Button */}
+        {/* View All Artists Button */}
         <div className="container mx-auto px-4 py-8 text-center">
-          <Link href="/artist/alex-grey">
+          <Link href="/artists">
             <Button
               size="lg"
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-12 py-6 text-lg rounded-full shadow-lg shadow-purple-600/50 hover:shadow-xl hover:shadow-purple-600/60 transition-all"
             >
-              View Alex Grey Collection
+              View All Artists
             </Button>
           </Link>
         </div>
