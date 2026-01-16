@@ -206,12 +206,6 @@ export default function ViewInRoom({
             {/* Artwork overlay with drag and pinch */}
             <div 
               className="absolute inset-0 flex items-center justify-center"
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onWheel={handleWheel}
             >
               <motion.div
                 ref={artworkRef}
@@ -225,7 +219,13 @@ export default function ViewInRoom({
                   transformOrigin: 'center',
                 }}
                 onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
                 onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onWheel={handleWheel}
               >
                 {/* Elegant Frame */}
                 <div className="relative" style={{ maxWidth: "500px" }}>
