@@ -307,7 +307,11 @@ export default function ArtistPage() {
       {/* Lightbox */}
       <AnimatePresence>
         {selectedLightboxArtwork && (
-          <Lightbox artwork={selectedLightboxArtwork} onClose={closeLightbox} />
+          <Lightbox 
+            artwork={selectedLightboxArtwork} 
+            onClose={closeLightbox}
+            onArtworkChange={(newArtwork) => setSelectedLightboxArtwork(newArtwork)}
+          />
         )}
       </AnimatePresence>
 

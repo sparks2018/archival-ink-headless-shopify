@@ -340,7 +340,16 @@ export default function MessagesPage() {
                         <div>
                           <h2 className="text-xl font-bold">{currentArtwork.artworkTitle}</h2>
                           <p className="text-gray-400">by {currentArtwork.artist}</p>
-                          <p className="text-sm text-purple-400 mt-1">{currentArtwork.commentCount} comments</p>
+                          <Button 
+                            onClick={() => {
+                              // Open artwork in lightbox
+                              // This will be implemented when we add lightbox state
+                              console.log('View artwork:', currentArtwork.id);
+                            }}
+                            className="mt-2 bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-1"
+                          >
+                            VIEW
+                          </Button>
                         </div>
                       </div>
                       <Button variant="ghost" size="icon">
