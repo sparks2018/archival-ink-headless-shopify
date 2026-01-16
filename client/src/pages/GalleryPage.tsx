@@ -57,7 +57,7 @@ export default function GalleryPage() {
   const [selectedThematicCategory, setSelectedThematicCategory] = useState("all");
   const [sortMode, setSortMode] = useState<SortMode>("browse");
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
-  const [priceRange, setPriceRange] = useState([0, 2000]);
+  const [priceRange, setPriceRange] = useState([0, 100000]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedMediums, setSelectedMediums] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(true);
@@ -71,7 +71,7 @@ export default function GalleryPage() {
     async function loadArtworks() {
       try {
         setLoading(true);
-        const products = await getProducts(100);
+        const products = await getProducts(250); // Fetch up to 250 products (Shopify max)
         const transformed = products.map(transformProduct);
         setArtworks(transformed);
         setFilteredArtworks(transformed);
@@ -152,7 +152,7 @@ export default function GalleryPage() {
     setSelectedProductType("");
     setSelectedThematicCategory("all");
     setSortMode("browse");
-    setPriceRange([0, 2000]);
+    setPriceRange([0, 100000]);
     setSelectedArtists([]);
     setSelectedMediums([]);
   };
@@ -373,8 +373,8 @@ export default function GalleryPage() {
                       <Slider
                         value={priceRange}
                         onValueChange={setPriceRange}
-                        max={2000}
-                        step={50}
+                        max={100000}
+                        step={1000}
                         className="mb-4"
                       />
                       <div className="flex items-center justify-between text-sm text-gray-600">
@@ -407,7 +407,7 @@ export default function GalleryPage() {
                           $500 - $1,000
                         </button>
                         <button
-                          onClick={() => setPriceRange([1000, 2000])}
+                          onClick={() => setPriceRange([1000, 100000])}
                           className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs col-span-2 transition-all"
                         >
                           Over $1,000
