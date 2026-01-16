@@ -22,9 +22,10 @@ interface ArtworkCardProps {
   onViewDetail?: (artwork: Artwork) => void;
   onClick?: (artwork: Artwork) => void;
   aspectRatio?: 'square' | 'portrait';
+  theme?: 'dark' | 'light';
 }
 
-export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRatio = 'square' }: ArtworkCardProps) {
+export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRatio = 'square', theme = 'dark' }: ArtworkCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [heartBounce, setHeartBounce] = useState(false);
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -79,7 +80,7 @@ export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRati
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="glass-card rounded-xl overflow-hidden">
+      <div className={`${theme === 'light' ? 'bg-white border border-gray-200' : 'glass-card'} rounded-xl overflow-hidden shadow-lg`}>
         {/* Image Container - Clickable to open lightbox */}
         <div 
           className={`relative ${aspectRatio === 'portrait' ? 'aspect-[3/4]' : 'aspect-square'} overflow-hidden cursor-pointer`}
@@ -172,14 +173,18 @@ export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRati
 
         {/* Content */}
         <div className="p-4">
-          <h3 className="font-playfair text-lg font-semibold text-white mb-1 line-clamp-1 group-hover:text-purple-300 transition-colors">
+          <h3 className={`font-playfair text-lg font-semibold mb-1 line-clamp-1 group-hover:text-purple-600 transition-colors ${
+            theme === 'light' ? 'text-gray-900' : 'text-white'
+          }`}>
             {artwork.title}
           </h3>
-          <p className="text-white/60 text-sm mb-3">
+          <p className={`text-sm mb-3 ${
+            theme === 'light' ? 'text-gray-600' : 'text-white/60'
+          }`}>
             by{" "}
             <a 
               href={`/artist/${artwork.artist.toLowerCase().replace(/\s+/g, '-')}`}
-              className="hover:text-purple-400 transition-colors cursor-pointer"
+              className="hover:text-purple-600 transition-colors cursor-pointer"
               onClick={(e) => e.stopPropagation()}
             >
               {artwork.artist}
@@ -187,11 +192,15 @@ export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRati
           </p>
           
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-white">
+            <span className={`text-xl font-bold ${
+              theme === 'light' ? 'text-gray-900' : 'text-white'
+            }`}>
               ${artwork.price.toLocaleString()}
             </span>
             {hasDiscount && (
-              <span className="text-sm text-white/40 line-through">
+              <span className={`text-sm line-through ${
+                theme === 'light' ? 'text-gray-400' : 'text-white/40'
+              }`}>
                 ${artwork.originalPrice?.toLocaleString()}
               </span>
             )}

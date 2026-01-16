@@ -114,7 +114,7 @@ export default function ArtworkRow({
                 transition={{ delay: index * 0.05 }}
                 className="flex-shrink-0 w-64"
               >
-                <ArtworkCard artwork={artwork} onClick={() => onViewDetail(artwork)} aspectRatio="portrait" />
+                <ArtworkCard artwork={artwork} onClick={() => onViewDetail(artwork)} aspectRatio="portrait" theme="light" />
               </motion.div>
             ))}
           </div>

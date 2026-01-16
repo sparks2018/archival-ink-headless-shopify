@@ -60,7 +60,6 @@ export default function ViewMoreFromArtist({ artistName, currentArtworkId, onArt
           {artistArtworks.map((artwork) => (
             <motion.div
               key={artwork.id}
-              onClick={() => onArtworkClick?.(artwork)}
               className="flex-shrink-0 w-48 group/card cursor-pointer"
               whileHover={{ y: -8 }}
               transition={{ duration: 0.2 }}
@@ -78,6 +77,45 @@ export default function ViewMoreFromArtist({ artistName, currentArtworkId, onArt
                   <span className="px-2 py-1 text-xs font-medium uppercase bg-purple-600/80 backdrop-blur-sm text-white rounded">
                     {artwork.category}
                   </span>
+                </div>
+
+                {/* Hover Overlay with Icons */}
+                <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Add to favorites logic
+                    }}
+                    className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
+                  
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onArtworkClick?.(artwork);
+                    }}
+                    className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </button>
+                  
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Add to cart logic
+                    }}
+                    className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </button>
                 </div>
               </div>
               
