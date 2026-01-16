@@ -147,26 +147,27 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
               alt={currentSlideData.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+            {/* Subtle vignette for text readability - much lighter */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
           </div>
 
-          {/* Content */}
-          <div className="relative h-full flex items-center justify-center">
-            <div className="container px-4">
+          {/* Content - Repositioned to bottom-left */}
+          <div className="relative h-full flex items-end pb-20">
+            <div className="container px-8">
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-center max-w-4xl mx-auto"
+                className="text-left max-w-2xl"
               >
                 {/* Artist Badge */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="inline-block mb-6"
+                  className="inline-block mb-3"
                 >
-                  <span className="px-4 py-2 rounded-full bg-purple-600/30 backdrop-blur-sm border border-purple-400/30 text-purple-300 text-sm font-medium uppercase tracking-wider">
+                  <span className="px-3 py-1.5 rounded-full bg-purple-600/40 backdrop-blur-md border border-purple-400/40 text-purple-200 text-xs font-medium uppercase tracking-wider">
                     {currentSlideData.artist}
                   </span>
                 </motion.div>
@@ -176,7 +177,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                  className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
                 >
                   {currentSlideData.title}
                 </motion.h1>
@@ -186,7 +187,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.8 }}
-                  className="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
+                  className="text-base md:text-lg text-white/90 mb-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
                 >
                   {currentSlideData.category}
                 </motion.p>
@@ -196,20 +197,20 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
-                  className="flex flex-col sm:flex-row gap-4 justify-center"
+                  className="flex flex-col sm:flex-row gap-3"
                 >
                   <Button
                     onClick={handleExploreClick}
-                    size="lg"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                    size="default"
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-sm rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
                   >
                     Explore Collection
                   </Button>
                   <Button
                     onClick={handleViewArtistClick}
-                    size="lg"
+                    size="default"
                     variant="outline"
-                    className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-6 text-lg rounded-full"
+                    className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-md px-6 py-3 text-sm rounded-full"
                   >
                     View Artist
                   </Button>

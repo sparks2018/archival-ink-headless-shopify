@@ -83,6 +83,45 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [selectedArtwork]);
 
+  // Check for artwork parameter on initial page load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const artworkParam = params.get('artwork');
+    
+    if (artworkParam && !selectedArtwork) {
+      // Wait for artworks to load, then find and open the matching artwork
+      const checkAndOpenArtwork = () => {
+        const allArtworks = [
+          ...trendingArtworks,
+          ...highestValueArtworks,
+          ...alexGreyArtworks,
+          ...lukeBrownArtworks,
+          ...hansHaveronArtworks,
+          ...johnParkArtworks,
+          ...mearOneArtworks,
+          ...michaelDivineArtworks,
+          ...androidJonesArtworks,
+          ...chrisDyerArtworks,
+          ...mars1Artworks,
+          ...vanSaroArtworks
+        ];
+        
+        const artwork = allArtworks.find(a => {
+          const slug = a.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          return slug === artworkParam;
+        });
+        
+        if (artwork) {
+          setSelectedArtwork(artwork);
+        }
+      };
+      
+      // Give artworks time to load
+      const timer = setTimeout(checkAndOpenArtwork, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [artworkParam, trendingArtworks, highestValueArtworks, alexGreyArtworks, lukeBrownArtworks, hansHaveronArtworks, johnParkArtworks, mearOneArtworks, michaelDivineArtworks, androidJonesArtworks, chrisDyerArtworks, mars1Artworks, vanSaroArtworks, selectedArtwork]);
+
   // Load artworks from Shopify API
   useEffect(() => {
     async function loadArtworks() {
