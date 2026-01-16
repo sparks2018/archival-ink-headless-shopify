@@ -263,7 +263,7 @@ export default function ProfilePage() {
               {mockActivities.map((activity) => (
                 <div
                   key={activity.id}
-                  className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-colors">
+                  className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-colors"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0">

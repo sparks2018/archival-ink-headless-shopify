@@ -477,7 +477,7 @@ export default function GalleryPage() {
             <div className="flex-1">
               <div className="mb-6">
                 <p className="text-gray-600">
-                  <span className="text-gray-900 font-semibold"
+                  <span className="text-gray-900 font-semibold">
                     {filteredArtworks.length}
                   </span>{" "}
                   artworks found
