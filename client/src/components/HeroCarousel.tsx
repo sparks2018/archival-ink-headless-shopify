@@ -231,7 +231,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                     size="default"
                     className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-sm rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
                   >
-                    Explore Collection
+                    View Our Collection
                   </Button>
                   <Button
                     onClick={handleViewAllArtistsClick}
