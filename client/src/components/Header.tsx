@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 import { Heart, ShoppingCart, Search, Menu, X, User, ChevronDown, MessageCircle } from "lucide-react";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCart } from "@/contexts/CartContext";
@@ -58,6 +57,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [showArtistsDropdown, setShowArtistsDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [location, setLocation] = useLocation();
   const { favoritesCount } = useFavorites();
   const { cartCount, setOnCartOpen } = useCart();
@@ -146,28 +147,38 @@ export default function Header() {
             <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) =>
                 item.hasDropdown ? (
-                  <DropdownMenu key={item.name}>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className="text-white/80 hover:text-white hover:bg-white/10 text-xs tracking-widest uppercase font-medium"
+                  <div key={item.name} className="relative" ref={dropdownRef}>
+                    <Button
+                      variant="ghost"
+                      className="text-white/80 hover:text-white hover:bg-white/10 text-xs tracking-widest uppercase font-medium"
+                      onMouseEnter={() => setShowArtistsDropdown(true)}
+                      onMouseLeave={() => setShowArtistsDropdown(false)}
+                      onClick={() => setLocation("/artists")}
+                    >
+                      {item.name}
+                      <ChevronDown className="w-4 h-4 ml-1" />
+                    </Button>
+                    {showArtistsDropdown && (
+                      <div 
+                        className="absolute top-full left-0 mt-2 glass-card border border-white/10 min-w-[200px] max-h-[400px] overflow-y-auto rounded-lg shadow-xl z-50"
+                        onMouseEnter={() => setShowArtistsDropdown(true)}
+                        onMouseLeave={() => setShowArtistsDropdown(false)}
                       >
-                        {item.name}
-                        <ChevronDown className="w-4 h-4 ml-1" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="glass-card border-white/10 min-w-[200px] max-h-[400px] overflow-y-auto">
-                      {artists.map((artist) => (
-                        <DropdownMenuItem
-                          key={artist.slug}
-                          className="text-white/80 hover:text-white hover:bg-white/10 cursor-pointer text-xs tracking-widest uppercase"
-                          onClick={() => handleArtistClick(artist.slug)}
-                        >
-                          {artist.name}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                        {artists.map((artist) => (
+                          <button
+                            key={artist.slug}
+                            className="w-full text-left px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 cursor-pointer text-xs tracking-widest uppercase"
+                            onClick={() => {
+                              handleArtistClick(artist.slug);
+                              setShowArtistsDropdown(false);
+                            }}
+                          >
+                            {artist.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <Button
                     key={item.name}
