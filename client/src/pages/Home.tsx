@@ -204,15 +204,7 @@ export default function Home() {
           />
         )}
 
-        {/* Most Liked Row */}
-        {mostLikedArtworks.length > 0 && (
-          <ArtworkRow
-            title="Most Popular"
-            subtitle="Fan favorites and bestsellers"
-            artworks={mostLikedArtworks}
-            onViewDetail={handleViewDetail}
-          />
-        )}
+        {/* Most Liked Row - REMOVED per user request */}
 
         {/* Artist-Specific Rows */}
         {lukeBrownArtworks.length > 0 && (

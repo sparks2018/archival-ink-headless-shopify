@@ -200,7 +200,7 @@ export default function ArtistPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${artistInfo.bannerImage})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-dark" />
+        {/* Dark overlay removed per user request - using drop shadows on text instead */}
         
         <div className="container relative z-10">
           <motion.div
