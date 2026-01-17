@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Grid, List, SlidersHorizontal, X } from "lucide-react";
+import { Search, Grid, List, SlidersHorizontal } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtworkCard from "@/components/ArtworkCard";
@@ -60,24 +60,11 @@ export default function GalleryPage() {
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedMediums, setSelectedMediums] = useState<string[]>([]);
-  
-  // Desktop: sidebar visible, Mobile: sidebar hidden
-  const [showFilters, setShowFilters] = useState(false);
-  const [showMobileFilterOverlay, setShowMobileFilterOverlay] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
 
   // Category counts
   const [thematicCounts, setThematicCounts] = useState<Record<string, number>>({});
   const [productTypeCounts, setProductTypeCounts] = useState<Record<string, number>>({});
-
-  // Detect if desktop (show sidebar by default on desktop)
-  useEffect(() => {
-    const checkIfDesktop = () => {
-      setShowFilters(window.innerWidth >= 1024); // lg breakpoint
-    };
-    checkIfDesktop();
-    window.addEventListener("resize", checkIfDesktop);
-    return () => window.removeEventListener("resize", checkIfDesktop);
-  }, []);
 
   // Load artworks from Shopify
   useEffect(() => {
@@ -169,132 +156,6 @@ export default function GalleryPage() {
     setSelectedArtists([]);
     setSelectedMediums([]);
   };
-
-  const handleShowResults = () => {
-    setShowMobileFilterOverlay(false);
-  };
-
-  // Filter sidebar content (reusable for desktop sidebar and mobile overlay)
-  const FilterContent = () => (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-gray-900 font-semibold">Filters</h3>
-        <button
-          onClick={clearAllFilters}
-          className="text-purple-400 text-sm hover:text-purple-300 transition-colors"
-        >
-          Clear all
-        </button>
-      </div>
-
-      {/* Price Range */}
-      <div className="mb-6">
-        <button
-          className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
-        >
-          <span className="font-medium">Price Range</span>
-          <span className="text-sm">▼</span>
-        </button>
-        <Slider
-          value={priceRange}
-          onValueChange={setPriceRange}
-          max={100000}
-          step={1000}
-          className="mb-4"
-        />
-        <div className="flex items-center justify-between text-sm text-gray-600">
-          <span>${priceRange[0]}</span>
-          <span>${priceRange[1]}</span>
-        </div>
-        <div className="grid grid-cols-2 gap-2 mt-4">
-          <button
-            onClick={() => setPriceRange([0, 100])}
-            className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
-          >
-            Under $100
-          </button>
-          <button
-            onClick={() => setPriceRange([100, 300])}
-            className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
-          >
-            $100 - $300
-          </button>
-          <button
-            onClick={() => setPriceRange([300, 500])}
-            className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
-          >
-            $300 - $500
-          </button>
-          <button
-            onClick={() => setPriceRange([500, 1000])}
-            className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
-          >
-            $500 - $1,000
-          </button>
-          <button
-            onClick={() => setPriceRange([1000, 100000])}
-            className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs col-span-2 transition-all"
-          >
-            Over $1,000
-          </button>
-        </div>
-      </div>
-
-      {/* Artist Filter */}
-      <div className="mb-6">
-        <button
-          className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
-        >
-          <span className="font-medium">Artist</span>
-          <span className="text-sm">▼</span>
-        </button>
-        <div className="space-y-3">
-          {artists.map((artist) => (
-            <label
-              key={artist}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <Checkbox
-                checked={selectedArtists.includes(artist)}
-                onCheckedChange={() => handleArtistToggle(artist)}
-                className="border-gray-300"
-              />
-              <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm">
-                {artist}
-              </span>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* Medium Filter */}
-      <div>
-        <button
-          className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
-        >
-          <span className="font-medium">Medium</span>
-          <span className="text-sm">▼</span>
-        </button>
-        <div className="space-y-3">
-          {mediums.map((medium) => (
-            <label
-              key={medium}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <Checkbox
-                checked={selectedMediums.includes(medium)}
-                onCheckedChange={() => handleMediumToggle(medium)}
-                className="border-gray-300"
-              />
-              <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm">
-                {medium}
-              </span>
-            </label>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -451,15 +312,8 @@ export default function GalleryPage() {
             </div>
 
             <div className="flex items-center gap-2">
-              {/* Mobile: All Filters button, Desktop: Toggle sidebar button */}
               <button
-                onClick={() => {
-                  if (window.innerWidth < 1024) {
-                    setShowMobileFilterOverlay(true);
-                  } else {
-                    setShowFilters(!showFilters);
-                  }
-                }}
+                onClick={() => setShowFilters(!showFilters)}
                 className="p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-all"
               >
                 <SlidersHorizontal className="w-5 h-5" />
@@ -488,17 +342,132 @@ export default function GalleryPage() {
           </motion.div>
 
           <div className="flex gap-8">
-            {/* Desktop Filters Sidebar */}
+            {/* Filters Sidebar */}
             <AnimatePresence>
               {showFilters && (
                 <motion.aside
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="hidden lg:block w-64 flex-shrink-0"
+                  className="w-64 flex-shrink-0"
                 >
-                  <div className="sticky top-24">
-                    <FilterContent />
+                  <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 sticky top-24">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-gray-900 font-semibold">Filters</h3>
+                      <button
+                        onClick={clearAllFilters}
+                        className="text-purple-400 text-sm hover:text-purple-300 transition-colors"
+                      >
+                        Clear all
+                      </button>
+                    </div>
+
+                    {/* Price Range */}
+                    <div className="mb-6">
+                      <button
+                        className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
+                      >
+                        <span className="font-medium">Price Range</span>
+                        <span className="text-sm">▼</span>
+                      </button>
+                      <Slider
+                        value={priceRange}
+                        onValueChange={setPriceRange}
+                        max={100000}
+                        step={1000}
+                        className="mb-4"
+                      />
+                      <div className="flex items-center justify-between text-sm text-gray-600">
+                        <span>${priceRange[0]}</span>
+                        <span>${priceRange[1]}</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 mt-4">
+                        <button
+                          onClick={() => setPriceRange([0, 100])}
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
+                        >
+                          Under $100
+                        </button>
+                        <button
+                          onClick={() => setPriceRange([100, 300])}
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
+                        >
+                          $100 - $300
+                        </button>
+                        <button
+                          onClick={() => setPriceRange([300, 500])}
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
+                        >
+                          $300 - $500
+                        </button>
+                        <button
+                          onClick={() => setPriceRange([500, 1000])}
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs transition-all"
+                        >
+                          $500 - $1,000
+                        </button>
+                        <button
+                          onClick={() => setPriceRange([1000, 100000])}
+                          className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-xs col-span-2 transition-all"
+                        >
+                          Over $1,000
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Artist Filter */}
+                    <div className="mb-6">
+                      <button
+                        className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
+                      >
+                        <span className="font-medium">Artist</span>
+                        <span className="text-sm">▼</span>
+                      </button>
+                      <div className="space-y-3">
+                        {artists.map((artist) => (
+                          <label
+                            key={artist}
+                            className="flex items-center gap-3 cursor-pointer group"
+                          >
+                            <Checkbox
+                              checked={selectedArtists.includes(artist)}
+                              onCheckedChange={() => handleArtistToggle(artist)}
+                              className="border-gray-300"
+                            />
+                            <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm">
+                              {artist}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Medium Filter */}
+                    <div>
+                      <button
+                        className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
+                      >
+                        <span className="font-medium">Medium</span>
+                        <span className="text-sm">▼</span>
+                      </button>
+                      <div className="space-y-3">
+                        {mediums.map((medium) => (
+                          <label
+                            key={medium}
+                            className="flex items-center gap-3 cursor-pointer group"
+                          >
+                            <Checkbox
+                              checked={selectedMediums.includes(medium)}
+                              onCheckedChange={() => handleMediumToggle(medium)}
+                              className="border-gray-300"
+                            />
+                            <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm">
+                              {medium}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </motion.aside>
               )}
@@ -535,7 +504,7 @@ export default function GalleryPage() {
                 <div
                   className={`grid gap-6 ${
                     viewMode === "grid"
-                      ? "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                       : "grid-cols-1"
                   }`}
                 >
@@ -562,41 +531,6 @@ export default function GalleryPage() {
       </main>
 
       <Footer />
-
-      {/* Mobile Filter Overlay (Full Screen) */}
-      <AnimatePresence>
-        {showMobileFilterOverlay && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-white lg:hidden overflow-y-auto"
-          >
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">Filter</h2>
-              <button
-                onClick={() => setShowMobileFilterOverlay(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
-            
-            <div className="p-4">
-              <FilterContent />
-            </div>
-
-            <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
-              <button
-                onClick={handleShowResults}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all"
-              >
-                Show {filteredArtworks.length} Results
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Lightbox */}
       <AnimatePresence>

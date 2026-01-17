@@ -62,7 +62,7 @@ export default function SubmitArtPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 bg-gradient-to-b from-purple-900/30 via-purple-800/20 to-white">
+      <section className="relative pt-32 pb-20 px-4 bg-gradient-to-b from-purple-600 via-purple-700 to-purple-800">
         <div className="container max-w-4xl text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-purple-600/20 mb-6">
             <Upload className="w-10 h-10 text-purple-400" />
