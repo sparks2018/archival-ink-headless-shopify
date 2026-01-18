@@ -439,21 +439,15 @@ export default function GalleryPage() {
             {/* Universal Filter Button Row (Sticky on Mobile) */}
             <div className="sticky top-0 z-30 bg-white pb-3 mb-4 md:static md:pb-0">
               <div className="flex items-center justify-between gap-3">
-                {/* Purple Hamburger Button (Compact on Mobile) */}
+                {/* Purple Hamburger Button (Mobile Only) */}
                 <button
-                  onClick={() => {
-                    if (window.innerWidth < 750) {
-                      setShowMobileFilterOverlay(true);
-                    } else {
-                      setShowFilters(true);
-                    }
-                  }}
-                  className="flex items-center gap-2 px-2 py-1.5 md:px-3 md:py-2 rounded-lg bg-white border border-gray-300 hover:border-purple-500 transition-all"
+                  onClick={() => setShowMobileFilterOverlay(true)}
+                  className="flex lg:hidden items-center gap-2 px-2 py-1.5 rounded-lg bg-white border border-gray-300 hover:border-purple-500 transition-all"
                 >
-                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
-                    <SlidersHorizontal className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
+                    <SlidersHorizontal className="w-3 h-3 text-white" />
                   </div>
-                  <span className="text-xs md:text-sm font-medium text-gray-900">All Filters</span>
+                  <span className="text-xs font-medium text-gray-900">All Filters</span>
                 </button>
 
                 {/* Sort Dropdown (Mobile, Compact) */}
@@ -549,35 +543,12 @@ export default function GalleryPage() {
           </motion.div>
 
           <div className="flex gap-8">
-            {/* Desktop Filters Sidebar */}
-            <AnimatePresence>
-              {showFilters && (
-                <>
-                  <motion.aside
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="hidden lg:block w-full max-w-[236px] flex-shrink-0"
-                  >
-                    <div className="sticky top-24">
-                      <FilterContent />
-                    </div>
-                  </motion.aside>
-                  
-                  {/* Floating X Button for Desktop Sidebar */}
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.2 }}
-                    onClick={() => setShowFilters(false)}
-                    className="hidden lg:block fixed top-24 left-[220px] z-50 w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
-                  >
-                    <X className="w-5 h-5 text-white" />
-                  </motion.button>
-                </>
-              )}
-            </AnimatePresence>
+            {/* Desktop Filters Sidebar (Always Visible, Embedded) */}
+            <aside className="hidden lg:block w-full max-w-[236px] flex-shrink-0">
+              <div className="sticky top-24">
+                <FilterContent />
+              </div>
+            </aside>
 
             {/* Artwork Grid */}
             <div className="flex-1">
