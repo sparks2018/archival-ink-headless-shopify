@@ -44,7 +44,7 @@ export default function FeaturedArtist({ onViewDetail }: FeaturedArtistProps) {
         </motion.div>
 
         {/* Artwork Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {displayArtworks.map((artwork, index) => (
             <motion.div
               key={artwork.id}

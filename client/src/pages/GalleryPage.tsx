@@ -72,7 +72,7 @@ export default function GalleryPage() {
   // Detect if desktop (show sidebar by default on desktop)
   useEffect(() => {
     const checkIfDesktop = () => {
-      setShowFilters(window.innerWidth >= 1024); // lg breakpoint
+      setShowFilters(window.innerWidth >= 760); // Custom 760px breakpoint
     };
     checkIfDesktop();
     window.addEventListener("resize", checkIfDesktop);
@@ -342,23 +342,23 @@ export default function GalleryPage() {
             transition={{ delay: 0.2 }}
             className="mb-6"
           >
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-gray-600 text-sm font-medium">Format:</span>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-gray-700 text-xs font-semibold">Format:</span>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {PRODUCT_TYPE_CATEGORIES.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedProductType(category.value)}
-                  className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  className={`px-4 py-1.5 rounded-full text-sm transition-all duration-300 ${
                     selectedProductType === category.value
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {category.label}
                   {productTypeCounts[category.id] !== undefined && (
-                    <span className="ml-2 text-xs opacity-60">
+                    <span className="ml-1.5 text-xs opacity-70">
                       ({productTypeCounts[category.id]})
                     </span>
                   )}
@@ -374,23 +374,23 @@ export default function GalleryPage() {
             transition={{ delay: 0.3 }}
             className="mb-8"
           >
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-gray-600 text-sm font-medium">Theme:</span>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-gray-700 text-xs font-semibold">Theme:</span>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {THEMATIC_CATEGORIES.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedThematicCategory(category.id)}
-                  className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  className={`px-4 py-1.5 rounded-full text-sm transition-all duration-300 ${
                     selectedThematicCategory === category.id
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {category.label}
                   {thematicCounts[category.id] !== undefined && (
-                    <span className="ml-2 text-xs opacity-60">
+                    <span className="ml-1.5 text-xs opacity-70">
                       ({thematicCounts[category.id]})
                     </span>
                   )}
@@ -454,7 +454,7 @@ export default function GalleryPage() {
               {/* Mobile: All Filters button, Desktop: Toggle sidebar button */}
               <button
                 onClick={() => {
-                  if (window.innerWidth < 1024) {
+                  if (window.innerWidth < 760) {
                     setShowMobileFilterOverlay(true);
                   } else {
                     setShowFilters(!showFilters);

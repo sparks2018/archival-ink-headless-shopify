@@ -103,6 +103,8 @@ export default function Header() {
     if (isLink) {
       setLocation(href);
       setIsMenuOpen(false);
+      // Scroll to top when navigating to any page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     if (href.startsWith("#")) {
@@ -119,6 +121,8 @@ export default function Header() {
     } else {
       setLocation(`/artist/${slug}`);
     }
+    // Scroll to top when navigating to artist page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
