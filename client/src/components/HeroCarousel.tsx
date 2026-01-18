@@ -302,12 +302,12 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           exit="exit"
           transition={{
             enter: {
-              x: { type: "tween", duration: 1.2, ease: "easeInOut" },
-              opacity: { duration: 1.5, ease: "easeInOut" },
+              x: { type: "tween", duration: 0.4, ease: "easeInOut" },
+              opacity: { duration: 0.4, ease: "easeInOut" },
             },
             exit: {
-              x: { type: "tween", duration: 0.6, ease: "easeInOut" },
-              opacity: { duration: 0.6, ease: "easeInOut" },
+              x: { type: "tween", duration: 0.3, ease: "easeInOut" },
+              opacity: { duration: 0.3, ease: "easeInOut" },
             },
           }}
           className="absolute inset-0"
