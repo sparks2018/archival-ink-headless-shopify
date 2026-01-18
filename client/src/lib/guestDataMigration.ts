@@ -29,19 +29,31 @@ export class GuestDataMigration {
       // Cart data
       const cartData = localStorage.getItem("cart");
       if (cartData) {
-        guestData.cart = JSON.parse(cartData);
+        try {
+          guestData.cart = JSON.parse(cartData) || [];
+        } catch {
+          guestData.cart = [];
+        }
       }
 
       // Favorites data
       const favoritesData = localStorage.getItem("favorites");
       if (favoritesData) {
-        guestData.favorites = JSON.parse(favoritesData);
+        try {
+          guestData.favorites = JSON.parse(favoritesData) || [];
+        } catch {
+          guestData.favorites = [];
+        }
       }
 
       // Recently viewed
       const recentlyViewedData = localStorage.getItem("recentlyViewed");
       if (recentlyViewedData) {
-        guestData.recentlyViewed = JSON.parse(recentlyViewedData);
+        try {
+          guestData.recentlyViewed = JSON.parse(recentlyViewedData) || [];
+        } catch {
+          guestData.recentlyViewed = [];
+        }
       }
 
       // Theme preference
@@ -231,10 +243,12 @@ export class GuestDataMigration {
   // Get migration summary for display
   static getMigrationSummary(): { cart: number; favorites: number; total: number } {
     const guestData = this.collectGuestData();
+    const cartLength = guestData.cart?.length || 0;
+    const favoritesLength = guestData.favorites?.length || 0;
     return {
-      cart: guestData.cart.length,
-      favorites: guestData.favorites.length,
-      total: guestData.cart.length + guestData.favorites.length,
+      cart: cartLength,
+      favorites: favoritesLength,
+      total: cartLength + favoritesLength,
     };
   }
 }
