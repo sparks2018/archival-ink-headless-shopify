@@ -13,83 +13,102 @@ interface HeroSlide {
   title: string;
   artist: string;
   artistSlug: string;
-  image: string;
+  desktopImage: string;
+  mobileImage: string;
   category: string;
+  inInventory: boolean;
 }
 
-// Static hero slides with high-resolution images
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "1",
     title: "Apotheosis of Hope",
     artist: "Michael Divine",
     artistSlug: "michael-divine",
-    image: "/michael_divine_enhanced.png",
-    category: "Gallery Collection"
+    desktopImage: "/slider/1 - Michael_Divine-Apotheosis_of_Hope-Desktop.jpg",
+    mobileImage: "/slider/Michael_Divine-Apotheosis_of_Hope-Mobile.jpg",
+    category: "Visionary Art",
+    inInventory: true
   },
   {
     id: "2",
-    title: "Sacred Geometry Lion",
-    artist: "Luke Brown",
-    artistSlug: "luke-brown",
-    image: "/luke_brown_enhanced.png",
-    category: "Gallery Collection"
-  },
-  {
-    id: "3",
-    title: "Pink Bubble Portrait",
-    artist: "Hans Haveron",
-    artistSlug: "hans-haveron",
-    image: "/hans_haveron_enhanced.png",
-    category: "Gallery Collection"
-  },
-  {
-    id: "4",
     title: "Anatomical Consciousness",
     artist: "Alex Grey",
     artistSlug: "alex-grey",
-    image: "/alex_grey_enhanced.png",
-    category: "Gallery Collection"
+    desktopImage: "/slider/Alex_Grey-Anatomical_Consciousness-Desktop.jpg",
+    mobileImage: "/slider/Alex_Grey-Anatomical_Consciousness-Mobile.jpg",
+    category: "Visionary Art",
+    inInventory: true
+  },
+  {
+    id: "3",
+    title: "Diamond Being",
+    artist: "Alex Grey",
+    artistSlug: "alex-grey",
+    desktopImage: "/slider/Alex_Grey-Diamond_Being-Desktop.jpg",
+    mobileImage: "/slider/Alex_Grey-Diamond_Being-Mobile.jpg",
+    category: "Sacred Geometry",
+    inInventory: true
+  },
+  {
+    id: "4",
+    title: "Cosmic Hummingbird",
+    artist: "Unknown Artist",
+    artistSlug: "",
+    desktopImage: "/slider/Cosmic_Hummingbird-Desktop.jpg",
+    mobileImage: "/slider/Cosmic_Hummingbird-Mobile.jpg",
+    category: "Featured Artwork",
+    inInventory: false
   },
   {
     id: "5",
-    title: "Divine Feminine",
-    artist: "Christopher Pugliese",
-    artistSlug: "christopher-pugliese",
-    image: "/christopher_pugliese_enhanced.png",
-    category: "Gallery Collection"
+    title: "Silk (Hand Embellished)",
+    artist: "Hans Haveron",
+    artistSlug: "hans-haveron",
+    desktopImage: "/slider/Hans_Haveron-Silk_Hand_Embellished-Desktop.jpg",
+    mobileImage: "/slider/Hans_Haveron-Silk_Hand_Embellished-Mobile.jpg",
+    category: "Contemporary Art",
+    inInventory: true
   },
   {
     id: "6",
-    title: "Apotheosis of Hope 1",
-    artist: "Michael Divine",
-    artistSlug: "michael-divine",
-    image: "/hero-images/Apotheosis-of-Hope-1-michaeldivine.jpg",
-    category: "Visionary Art"
+    title: "Chiaro",
+    artist: "John Park",
+    artistSlug: "john-park",
+    desktopImage: "/slider/John_Park-Chiaro-Desktop (1).jpg",
+    mobileImage: "/slider/John_Park-Chiaro-Mobile.jpg",
+    category: "Mixed Media",
+    inInventory: true
   },
   {
     id: "7",
-    title: "Golden Lion",
+    title: "Apotheosis",
     artist: "Luke Brown",
     artistSlug: "luke-brown",
-    image: "/hero-images/lukebrown.jpg",
-    category: "Psychedelic Art"
+    desktopImage: "/slider/Luke_Brown-Apotheosis-Desktop.jpg",
+    mobileImage: "/slider/Luke_Brown-Apotheosis-Mobile.jpg",
+    category: "Psychedelic Art",
+    inInventory: true
   },
   {
     id: "8",
-    title: "Bicycle Day",
-    artist: "Alex Grey",
-    artistSlug: "alex-grey",
-    image: "/hero-images/alex-grey-3.jpg",
-    category: "Visionary Art"
+    title: "Psychedelic Goddess",
+    artist: "Unknown Artist",
+    artistSlug: "",
+    desktopImage: "/slider/Psychedelic_Goddess-Desktop.jpg",
+    mobileImage: "/slider/Psychedelic_Goddess-Mobile.jpg",
+    category: "Featured Artwork",
+    inInventory: false
   },
   {
     id: "9",
-    title: "Divine Feminine",
-    artist: "Christopher Pugliese",
-    artistSlug: "christopher-pugliese",
-    image: "/hero-images/Christopher-Pugliese.jpg",
-    category: "Visionary Art"
+    title: "Thermal Vision",
+    artist: "Unknown Artist",
+    artistSlug: "",
+    desktopImage: "/slider/Thermal_Figure-Desktop.jpg",
+    mobileImage: "/slider/Thermal_Figure-Mobile.jpg",
+    category: "Featured Artwork",
+    inInventory: false
   }
 ];
 
@@ -120,7 +139,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
     onSlideChange?.();
   };
 
-  // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -146,7 +164,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
     setTouchEnd(0);
   };
 
-  // Auto-rotation every 8 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
@@ -174,14 +191,18 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
 
   const currentSlideData = heroSlides[currentSlide];
 
-  const handleExploreClick = () => {
-    // Navigate to the artist's collection page
-    setLocation(`/artist/${currentSlideData.artistSlug}`);
+  const handleViewArtistClick = () => {
+    if (currentSlideData.artistSlug) {
+      setLocation(`/artist/${currentSlideData.artistSlug}`);
+    }
   };
 
-  const handleViewAllArtistsClick = () => {
-    // Navigate to all artists page
-    setLocation('/artists');
+  const handleViewCollectionClick = () => {
+    setLocation('/gallery');
+  };
+
+  const handleSubmitArtClick = () => {
+    setLocation('/submit-art');
   };
 
   return (
@@ -191,7 +212,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background Slides */}
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
@@ -207,18 +227,18 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           }}
           className="absolute inset-0"
         >
-          {/* Background Image with Overlay */}
           <div className="absolute inset-0">
-            <img
-              src={currentSlideData.image}
-              alt={currentSlideData.title}
-              className="w-full h-full object-cover"
-            />
-            {/* Subtle vignette for text readability - much lighter */}
+            <picture>
+              <source media="(max-width: 767px)" srcSet={currentSlideData.mobileImage} />
+              <img
+                src={currentSlideData.desktopImage}
+                alt={currentSlideData.title}
+                className="w-full h-full object-cover"
+              />
+            </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
           </div>
 
-          {/* Content - Repositioned to bottom-left */}
           <div className="relative h-full flex items-end pb-20">
             <div className="container px-8">
               <motion.div
@@ -227,7 +247,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="text-left max-w-2xl"
               >
-                {/* Artist Badge */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -239,7 +258,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                   </span>
                 </motion.div>
 
-                {/* Title */}
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -249,38 +267,64 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                   {currentSlideData.title}
                 </motion.h1>
 
-                {/* Subtitle */}
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.8 }}
                   className="text-base md:text-lg text-white/90 mb-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
                 >
-                  {currentSlideData.category}
+                  {currentSlideData.inInventory ? (
+                    <span>{currentSlideData.category}</span>
+                  ) : (
+                    <span>Join Our Gallery • Submit Your Artwork</span>
+                  )}
                 </motion.p>
 
-                {/* CTA Buttons */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
                   className="flex flex-col sm:flex-row gap-3"
                 >
-                  <Button
-                    onClick={handleExploreClick}
-                    size="default"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-sm rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-                  >
-                    View Our Collection
-                  </Button>
-                  <Button
-                    onClick={handleViewAllArtistsClick}
-                    size="default"
-                    variant="outline"
-                    className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-md px-6 py-3 text-sm rounded-full"
-                  >
-                    View All Artists
-                  </Button>
+                  {currentSlideData.inInventory ? (
+                    <>
+                      {currentSlideData.artistSlug && (
+                        <Button
+                          onClick={handleViewArtistClick}
+                          size="default"
+                          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-sm rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                        >
+                          View Artist
+                        </Button>
+                      )}
+                      <Button
+                        onClick={handleViewCollectionClick}
+                        size="default"
+                        variant="outline"
+                        className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-md px-6 py-3 text-sm rounded-full"
+                      >
+                        View Collection
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        onClick={handleSubmitArtClick}
+                        size="default"
+                        className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-sm rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                      >
+                        Submit Art
+                      </Button>
+                      <Button
+                        onClick={handleViewCollectionClick}
+                        size="default"
+                        variant="outline"
+                        className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-md px-6 py-3 text-sm rounded-full"
+                      >
+                        View Gallery
+                      </Button>
+                    </>
+                  )}
                 </motion.div>
               </motion.div>
             </div>
@@ -288,7 +332,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full glass flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all"
@@ -305,7 +348,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
         <ChevronRight className="w-6 h-6" />
       </button>
 
-      {/* Slide Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {heroSlides.map((_, index) => (
           <button
@@ -321,7 +363,6 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
         ))}
       </div>
 
-      {/* Slide Counter */}
       <div className="absolute bottom-8 right-8 z-10 glass px-4 py-2 rounded-full">
         <span className="text-white text-sm font-medium">
           {currentSlide + 1} / {heroSlides.length}
