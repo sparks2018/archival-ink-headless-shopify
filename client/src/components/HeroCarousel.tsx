@@ -250,7 +250,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? -300 : 300,
+      x: direction > 0 ? -300 : 300,
       opacity: 0,
     }),
   };
