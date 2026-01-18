@@ -22,17 +22,15 @@ export function useAuth() {
   return { isAuthenticated, isLoading, logout };
 }
 
-export function useRequireAuth(redirectTo = "/login") {
-  const [, setLocation] = useLocation();
+export function useRequireAuth(showModal = true) {
   const { isAuthenticated, isLoading } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      // Redirect to login with current path as redirect param
-      const currentPath = window.location.pathname;
-      setLocation(`${redirectTo}?redirect=${encodeURIComponent(currentPath)}`);
+    if (!isLoading && !isAuthenticated && showModal) {
+      setShowLoginModal(true);
     }
-  }, [isAuthenticated, isLoading, redirectTo, setLocation]);
+  }, [isAuthenticated, isLoading, showModal]);
 
-  return { isAuthenticated, isLoading };
+  return { isAuthenticated, isLoading, showLoginModal, setShowLoginModal };
 }
