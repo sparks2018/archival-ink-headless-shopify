@@ -16,6 +16,7 @@ import ContactPage from "./pages/ContactPage";
 import SubmitArtPage from "./pages/SubmitArtPage";
 import GalleryPage from "./pages/GalleryPage";
 import AllArtistsPage from "./pages/AllArtistsPage";
+import AuthCallback from "./pages/AuthCallback";
 import { EmailCaptureManager } from "./components/EmailCaptureManager";
 import { MigrationNotification } from "./components/MigrationNotification";
 
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/login" component={LoginPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/submit-art" component={SubmitArtPage} />
+      <Route path="/api/auth/google" component={AuthCallback} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

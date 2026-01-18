@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StarField from "@/components/StarField";
+import { useAuth } from "@/hooks/useAuth";
 
 type Tab = "activity" | "favorites" | "orders" | "following" | "settings";
 
@@ -56,7 +57,7 @@ const mockActivities: ActivityItem[] = [
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<Tab>("activity");
-  const [isLoggedIn] = useState(false); // TODO: Replace with actual auth check
+  const { isAuthenticated } = useAuth();
 
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -111,7 +112,8 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-white">
       <StarField />
       <Header />
-      {/* Hero Header */}
+      {/* Hero Header - Only show if logged in */}
+      {isAuthenticated && (
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 relative mt-20">
         <div className="container py-16">
           <div className="flex items-start gap-8">
@@ -177,8 +179,10 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+      )}
 
-      {/* Tabs */}
+      {/* Tabs - Only show if logged in */}
+      {isAuthenticated && (
       <div className="border-b border-gray-200 bg-gray-50">
         <div className="container">
           <div className="flex gap-8">
@@ -240,10 +244,11 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Content */}
       <div className="container py-12">
-        {!isLoggedIn ? (
+        {!isAuthenticated ? (
           <div className="max-w-3xl mx-auto text-center py-16">
             <div className="bg-gray-50 rounded-xl p-12 border border-gray-200">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Please Log In</h2>

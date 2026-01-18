@@ -1,6 +1,8 @@
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCart } from "@/contexts/CartContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { FavoritesLoginPopup } from "@/components/FavoritesLoginPopup";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ArtworkCard from "@/components/ArtworkCard";
@@ -11,11 +13,24 @@ import { Button } from "@/components/ui/button";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
+  const { isAuthenticated } = useAuth();
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Show login popup after 10 seconds if not authenticated
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const timer = setTimeout(() => {
+        setShowLoginPopup(true);
+      }, 10000); // 10 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -102,6 +117,11 @@ export default function Favorites() {
       </main>
 
       <Footer />
+      
+      {/* Login Popup */}
+      {showLoginPopup && (
+        <FavoritesLoginPopup onClose={() => setShowLoginPopup(false)} />
+      )}
     </div>
   );
 }

@@ -58,25 +58,7 @@ export default function FeaturedArtist({ onViewDetail }: FeaturedArtistProps) {
           ))}
         </div>
 
-        {/* View More Button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <button
-            onClick={() => {
-              const artistsSection = document.getElementById('artists');
-              if (artistsSection) {
-                artistsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
-            className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
-          >
-            All Artists
-          </button>
-        </motion.div>
+
       </div>
     </section>
   );

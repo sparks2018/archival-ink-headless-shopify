@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ShoppingCart, Eye, ZoomIn } from "lucide-react";
+import { Heart, ShoppingCart, Eye, ZoomIn, MessageCircle } from "lucide-react";
+import { InquiryModal } from "./InquiryModal";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ interface Artwork {
   image: string;
   category: string;
   soldOut?: boolean;
+  isInquiryOnly?: boolean; // Flag for non-Shopify inventory items
 }
 
 interface ArtworkCardProps {
@@ -28,6 +30,7 @@ interface ArtworkCardProps {
 export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRatio = 'square', theme = 'dark' }: ArtworkCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [heartBounce, setHeartBounce] = useState(false);
+  const [showInquiryModal, setShowInquiryModal] = useState(false);
   const { isFavorite, toggleFavorite } = useFavorites();
   const { addToCart, isInCart } = useCart();
 
@@ -48,6 +51,10 @@ export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRati
     e.stopPropagation();
     if (artwork.soldOut) {
       toast.error("This artwork is sold out");
+      return;
+    }
+    if (artwork.isInquiryOnly) {
+      setShowInquiryModal(true);
       return;
     }
     addToCart({
@@ -163,8 +170,17 @@ export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRati
                   className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0"
                   size="sm"
                 >
-                  <ShoppingCart className="w-4 h-4 mr-2" />
-                  Add
+                  {artwork.isInquiryOnly ? (
+                    <>
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Inquire
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      Add
+                    </>
+                  )}
                 </Button>
               </motion.div>
             )}
@@ -214,6 +230,14 @@ export default function ArtworkCard({ artwork, onViewDetail, onClick, aspectRati
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       />
+
+      {/* Inquiry Modal */}
+      {showInquiryModal && (
+        <InquiryModal
+          artwork={artwork}
+          onClose={() => setShowInquiryModal(false)}
+        />
+      )}
     </motion.div>
   );
 }
