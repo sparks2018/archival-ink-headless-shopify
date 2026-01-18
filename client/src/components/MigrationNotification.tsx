@@ -8,27 +8,32 @@ export function MigrationNotification() {
   const [summary, setSummary] = useState({ cart: 0, favorites: 0, total: 0 });
 
   useEffect(() => {
-    // Check if we just completed a migration
-    const migrated = localStorage.getItem("guestDataMigrated");
-    const migratedAt = localStorage.getItem("migratedAt");
-    
-    if (migrated === "true" && migratedAt) {
-      const timeSinceMigration = Date.now() - parseInt(migratedAt);
+    try {
+      // Check if we just completed a migration
+      const migrated = localStorage.getItem("guestDataMigrated");
+      const migratedAt = localStorage.getItem("migratedAt");
       
-      // Show notification if migration happened in last 10 seconds
-      if (timeSinceMigration < 10000) {
-        const migrationSummary = GuestDataMigration.getMigrationSummary();
+      if (migrated === "true" && migratedAt) {
+        const timeSinceMigration = Date.now() - parseInt(migratedAt);
         
-        if (migrationSummary.total > 0) {
-          setSummary(migrationSummary);
-          setShow(true);
+        // Show notification if migration happened in last 10 seconds
+        if (timeSinceMigration < 10000) {
+          const migrationSummary = GuestDataMigration.getMigrationSummary();
           
-          // Auto-hide after 8 seconds
-          setTimeout(() => {
-            setShow(false);
-          }, 8000);
+          if (migrationSummary && migrationSummary.total > 0) {
+            setSummary(migrationSummary);
+            setShow(true);
+            
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+              setShow(false);
+            }, 8000);
+          }
         }
       }
+    } catch (error) {
+      console.error("Error in MigrationNotification:", error);
+      // Silently fail - don't break the app
     }
   }, []);
 
