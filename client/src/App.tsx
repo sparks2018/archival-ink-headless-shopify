@@ -17,7 +17,7 @@ import SubmitArtPage from "./pages/SubmitArtPage";
 import GalleryPage from "./pages/GalleryPage";
 import AllArtistsPage from "./pages/AllArtistsPage";
 import { EmailCaptureManager } from "./components/EmailCaptureManager";
-import { MigrationNotification } from "./components/MigrationNotification";
+// import { MigrationNotification } from "./components/MigrationNotification";
 
 function Router() {
   return (
@@ -47,7 +47,7 @@ function App() {
             <TooltipProvider>
               <Toaster />
               <EmailCaptureManager />
-      <MigrationNotification />
+      {/* <MigrationNotification /> */}
               <Router />
             </TooltipProvider>
           </CartProvider>
