@@ -301,8 +301,14 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.5 },
+            enter: {
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.5 },
+            },
+            exit: {
+              x: { type: "spring", stiffness: 600, damping: 40 },
+              opacity: { duration: 0.3 },
+            },
           }}
           className="absolute inset-0"
         >
@@ -461,9 +467,9 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
         >
           {isPaused ? (
-            <Play className="w-4 h-4" fill="currentColor" />
+            <Play className="w-4 h-4 pointer-events-none" fill="currentColor" />
           ) : (
-            <Pause className="w-4 h-4" fill="currentColor" />
+            <Pause className="w-4 h-4 pointer-events-none" fill="currentColor" />
           )}
         </button>
         
