@@ -16,6 +16,7 @@ import ContactPage from "./pages/ContactPage";
 import SubmitArtPage from "./pages/SubmitArtPage";
 import GalleryPage from "./pages/GalleryPage";
 import AllArtistsPage from "./pages/AllArtistsPage";
+import { EmailCaptureManager } from "./components/EmailCaptureManager";
 
 function Router() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <CartProvider>
             <TooltipProvider>
               <Toaster />
+              <EmailCaptureManager />
               <Router />
             </TooltipProvider>
           </CartProvider>
