@@ -353,7 +353,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                         variant="outline"
                         className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-md px-6 py-3 text-sm rounded-full"
                       >
-                        View Collection
+                        View Full Archive >
                       </Button>
                     </>
                   ) : (
@@ -363,7 +363,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                         size="default"
                         className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-sm rounded-full shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
                       >
-                        Submit Art
+                        Submit Your Own Artwork
                       </Button>
                       <Button
                         onClick={handleViewCollectionClick}
