@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { toast } from "sonner";
+import packageJson from "../../../package.json";
 
 const footerLinks = {
   company: [
@@ -98,6 +99,8 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <p className="text-white/40 text-sm">
             Copyright © {new Date().getFullYear()}, Archival Ink Gallery
+            <span className="mx-2">•</span>
+            <span className="text-purple-400/60">v{packageJson.version}</span>
           </p>
         </div>
       </div>
