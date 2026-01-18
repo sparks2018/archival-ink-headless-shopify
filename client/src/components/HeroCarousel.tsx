@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 
@@ -14,7 +14,9 @@ interface HeroSlide {
   artist: string;
   artistSlug: string;
   desktopImage: string;
+  desktopImageWebP: string;
   mobileImage: string;
+  mobileImageWebP: string;
   category: string;
   inInventory: boolean;
 }
@@ -25,8 +27,10 @@ const HERO_SLIDES: HeroSlide[] = [
     title: "Apotheosis of Hope",
     artist: "Michael Divine",
     artistSlug: "michael-divine",
-    desktopImage: "/slider/1 - Michael_Divine-Apotheosis_of_Hope-Desktop.jpg",
+    desktopImage: "/slider/Michael_Divine-Apotheosis_of_Hope-Desktop.jpg",
+    desktopImageWebP: "/slider/Michael_Divine-Apotheosis_of_Hope-Desktop.webp",
     mobileImage: "/slider/Michael_Divine-Apotheosis_of_Hope-Mobile.jpg",
+    mobileImageWebP: "/slider/Michael_Divine-Apotheosis_of_Hope-Mobile.webp",
     category: "Visionary Art",
     inInventory: true
   },
@@ -36,7 +40,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Alex Grey",
     artistSlug: "alex-grey",
     desktopImage: "/slider/Alex_Grey-Anatomical_Consciousness-Desktop.jpg",
+    desktopImageWebP: "/slider/Alex_Grey-Anatomical_Consciousness-Desktop.webp",
     mobileImage: "/slider/Alex_Grey-Anatomical_Consciousness-Mobile.jpg",
+    mobileImageWebP: "/slider/Alex_Grey-Anatomical_Consciousness-Mobile.webp",
     category: "Visionary Art",
     inInventory: true
   },
@@ -46,7 +52,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Alex Grey",
     artistSlug: "alex-grey",
     desktopImage: "/slider/Alex_Grey-Diamond_Being-Desktop.jpg",
+    desktopImageWebP: "/slider/Alex_Grey-Diamond_Being-Desktop.webp",
     mobileImage: "/slider/Alex_Grey-Diamond_Being-Mobile.jpg",
+    mobileImageWebP: "/slider/Alex_Grey-Diamond_Being-Mobile.webp",
     category: "Sacred Geometry",
     inInventory: true
   },
@@ -56,7 +64,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Unknown Artist",
     artistSlug: "",
     desktopImage: "/slider/Cosmic_Hummingbird-Desktop.jpg",
+    desktopImageWebP: "/slider/Cosmic_Hummingbird-Desktop.webp",
     mobileImage: "/slider/Cosmic_Hummingbird-Mobile.jpg",
+    mobileImageWebP: "/slider/Cosmic_Hummingbird-Mobile.webp",
     category: "Featured Artwork",
     inInventory: false
   },
@@ -66,7 +76,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Hans Haveron",
     artistSlug: "hans-haveron",
     desktopImage: "/slider/Hans_Haveron-Silk_Hand_Embellished-Desktop.jpg",
+    desktopImageWebP: "/slider/Hans_Haveron-Silk_Hand_Embellished-Desktop.webp",
     mobileImage: "/slider/Hans_Haveron-Silk_Hand_Embellished-Mobile.jpg",
+    mobileImageWebP: "/slider/Hans_Haveron-Silk_Hand_Embellished-Mobile.webp",
     category: "Contemporary Art",
     inInventory: true
   },
@@ -75,8 +87,10 @@ const HERO_SLIDES: HeroSlide[] = [
     title: "Chiaro",
     artist: "John Park",
     artistSlug: "john-park",
-    desktopImage: "/slider/John_Park-Chiaro-Desktop (1).jpg",
+    desktopImage: "/slider/John_Park-Chiaro-Desktop.jpg",
+    desktopImageWebP: "/slider/John_Park-Chiaro-Desktop.webp",
     mobileImage: "/slider/John_Park-Chiaro-Mobile.jpg",
+    mobileImageWebP: "/slider/John_Park-Chiaro-Mobile.webp",
     category: "Mixed Media",
     inInventory: true
   },
@@ -86,7 +100,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Luke Brown",
     artistSlug: "luke-brown",
     desktopImage: "/slider/Luke_Brown-Apotheosis-Desktop.jpg",
+    desktopImageWebP: "/slider/Luke_Brown-Apotheosis-Desktop.webp",
     mobileImage: "/slider/Luke_Brown-Apotheosis-Mobile.jpg",
+    mobileImageWebP: "/slider/Luke_Brown-Apotheosis-Mobile.webp",
     category: "Psychedelic Art",
     inInventory: true
   },
@@ -96,7 +112,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Unknown Artist",
     artistSlug: "",
     desktopImage: "/slider/Psychedelic_Goddess-Desktop.jpg",
+    desktopImageWebP: "/slider/Psychedelic_Goddess-Desktop.webp",
     mobileImage: "/slider/Psychedelic_Goddess-Mobile.jpg",
+    mobileImageWebP: "/slider/Psychedelic_Goddess-Mobile.webp",
     category: "Featured Artwork",
     inInventory: false
   },
@@ -106,7 +124,9 @@ const HERO_SLIDES: HeroSlide[] = [
     artist: "Unknown Artist",
     artistSlug: "",
     desktopImage: "/slider/Thermal_Figure-Desktop.jpg",
+    desktopImageWebP: "/slider/Thermal_Figure-Desktop.webp",
     mobileImage: "/slider/Thermal_Figure-Mobile.jpg",
+    mobileImageWebP: "/slider/Thermal_Figure-Mobile.webp",
     category: "Featured Artwork",
     inInventory: false
   }
@@ -118,6 +138,8 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
   const [direction, setDirection] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [pauseTimeout, setPauseTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const heroSlides = HERO_SLIDES;
 
@@ -137,6 +159,25 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
     setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
     onSlideChange?.();
+  };
+
+  const togglePause = () => {
+    setIsPaused(!isPaused);
+    
+    // Clear existing timeout if any
+    if (pauseTimeout) {
+      clearTimeout(pauseTimeout);
+      setPauseTimeout(null);
+    }
+    
+    // If pausing, set timeout to auto-resume after 20 seconds
+    if (!isPaused) {
+      const timeout = setTimeout(() => {
+        setIsPaused(false);
+        setPauseTimeout(null);
+      }, 20000);
+      setPauseTimeout(timeout);
+    }
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -165,9 +206,20 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 8000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
+    if (!isPaused) {
+      const interval = setInterval(nextSlide, 9000); // Changed from 8000 to 9000 (9 seconds)
+      return () => clearInterval(interval);
+    }
+  }, [nextSlide, isPaused]);
+
+  // Cleanup pause timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (pauseTimeout) {
+        clearTimeout(pauseTimeout);
+      }
+    };
+  }, [pauseTimeout]);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -229,7 +281,9 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
         >
           <div className="absolute inset-0">
             <picture>
+              <source media="(max-width: 767px)" type="image/webp" srcSet={currentSlideData.mobileImageWebP} />
               <source media="(max-width: 767px)" srcSet={currentSlideData.mobileImage} />
+              <source type="image/webp" srcSet={currentSlideData.desktopImageWebP} />
               <img
                 src={currentSlideData.desktopImage}
                 alt={currentSlideData.title}
@@ -276,7 +330,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
                   {currentSlideData.inInventory ? (
                     <span>{currentSlideData.category}</span>
                   ) : (
-                    <span>Join Our Gallery • Submit Your Artwork</span>
+                    <span>Submit Your Own Artwork →</span>
                   )}
                 </motion.p>
 
@@ -363,10 +417,24 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
         ))}
       </div>
 
-      <div className="absolute bottom-8 right-8 z-10 glass px-4 py-2 rounded-full">
-        <span className="text-white text-sm font-medium">
-          {currentSlide + 1} / {heroSlides.length}
-        </span>
+      <div className="absolute bottom-8 right-8 z-10 flex items-center gap-3">
+        <button
+          onClick={togglePause}
+          className="glass w-10 h-10 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all"
+          aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
+        >
+          {isPaused ? (
+            <Play className="w-4 h-4" fill="currentColor" />
+          ) : (
+            <Pause className="w-4 h-4" fill="currentColor" />
+          )}
+        </button>
+        
+        <div className="glass px-4 py-2 rounded-full">
+          <span className="text-white text-sm font-medium">
+            {currentSlide + 1} / {heroSlides.length}
+          </span>
+        </div>
       </div>
     </section>
   );
