@@ -467,9 +467,9 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
         >
           {isPaused ? (
-            <Play className="w-4 h-4 pointer-events-none" fill="currentColor" />
+            <Play className="w-4 h-4" fill="currentColor" style={{ pointerEvents: 'none' }} />
           ) : (
-            <Pause className="w-4 h-4 pointer-events-none" fill="currentColor" />
+            <Pause className="w-4 h-4" fill="currentColor" style={{ pointerEvents: 'none' }} />
           )}
         </button>
         
