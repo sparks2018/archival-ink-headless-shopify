@@ -248,9 +248,9 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
       x: 0,
       opacity: 1,
     },
-    exit: (direction: number) => ({
+    exit: () => ({
       zIndex: 0,
-      x: direction > 0 ? 300 : -300,  // Same as enter, will move in same direction
+      x: -300,  // Always exit LEFT
       opacity: 0,
     }),
   };
