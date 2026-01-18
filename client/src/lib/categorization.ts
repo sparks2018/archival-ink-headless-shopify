@@ -47,7 +47,7 @@ export const PRODUCT_TYPE_CATEGORIES = [
 
 // Thematic categories (keyword-based)
 export const THEMATIC_CATEGORIES = [
-  { id: "all", label: "All Themes" },
+  { id: "all", label: "All Genres" },
   { id: "psychedelic", label: "Psychedelic" },
   { id: "visionary", label: "Visionary" },
   { id: "spiritual", label: "Spiritual" },

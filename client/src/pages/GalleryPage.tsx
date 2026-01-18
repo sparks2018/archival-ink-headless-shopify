@@ -340,7 +340,7 @@ export default function GalleryPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-6"
+            className="mb-3"
           >
             <div className="flex items-center gap-2 mb-2">
               <span className="text-gray-700 text-xs font-semibold">Format:</span>
@@ -372,7 +372,7 @@ export default function GalleryPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mb-8"
+            className="mb-4"
           >
             <div className="flex items-center gap-2 mb-2">
               <span className="text-gray-700 text-xs font-semibold">Theme:</span>
@@ -399,91 +399,114 @@ export default function GalleryPage() {
             </div>
           </motion.div>
 
-          {/* Sort Tabs & View Controls */}
+          {/* Mobile Filter Button Row + Desktop Sort Tabs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center justify-between mb-8"
+            className="mb-6"
           >
-            <div className="flex gap-2">
+            {/* Mobile: Filter + Sort Row */}
+            <div className="flex items-center justify-between gap-3 md:hidden mb-4">
+              {/* All Filters Button (Purple Circle + Text) */}
               <button
-                onClick={() => setSortMode("browse")}
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${
-                  sortMode === "browse"
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
+                onClick={() => setShowMobileFilterOverlay(true)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-300 hover:border-purple-500 transition-all"
               >
-                <Grid className="w-4 h-4" />
-                Browse
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
+                  <SlidersHorizontal className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-sm font-medium text-gray-900">All Filters</span>
               </button>
-              <button
-                onClick={() => setSortMode("trending")}
-                className={`px-4 py-2 rounded-lg transition-all ${
-                  sortMode === "trending"
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
+
+              {/* Sort Dropdown */}
+              <select
+                value={sortMode}
+                onChange={(e) => setSortMode(e.target.value as SortMode)}
+                className="px-3 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:border-purple-500 transition-all"
               >
-                Trending
-              </button>
-              <button
-                onClick={() => setSortMode("featured")}
-                className={`px-4 py-2 rounded-lg transition-all ${
-                  sortMode === "featured"
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
-              >
-                Featured
-              </button>
-              <button
-                onClick={() => setSortMode("for-you")}
-                className={`px-4 py-2 rounded-lg transition-all ${
-                  sortMode === "for-you"
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
-              >
-                For You
-              </button>
+                <option value="browse">Sort: Best Match</option>
+                <option value="trending">Sort: Trending</option>
+                <option value="featured">Sort: Featured</option>
+                <option value="for-you">Sort: For You</option>
+              </select>
             </div>
 
-            <div className="flex items-center gap-2">
-              {/* Mobile: All Filters button, Desktop: Toggle sidebar button */}
-              <button
-                onClick={() => {
-                  if (window.innerWidth < 760) {
-                    setShowMobileFilterOverlay(true);
-                  } else {
-                    setShowFilters(!showFilters);
-                  }
-                }}
-                className="p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-all"
-              >
-                <SlidersHorizontal className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`p-2 rounded-lg transition-all ${
-                  viewMode === "grid"
-                    ? "bg-gray-200 text-gray-900"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                }`}
-              >
-                <Grid className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode("list")}
-                className={`p-2 rounded-lg transition-all ${
-                  viewMode === "list"
-                    ? "bg-gray-200 text-gray-900"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
-                }`}
-              >
-                <List className="w-5 h-5" />
-              </button>
+            {/* Desktop: Sort Tabs & View Controls */}
+            <div className="hidden md:flex items-center justify-between">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setSortMode("browse")}
+                  className={`px-3 py-1.5 rounded-lg flex items-center gap-2 text-sm transition-all ${
+                    sortMode === "browse"
+                      ? "bg-gray-200 text-gray-900"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  <Grid className="w-4 h-4" />
+                  Browse
+                </button>
+                <button
+                  onClick={() => setSortMode("trending")}
+                  className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
+                    sortMode === "trending"
+                      ? "bg-gray-200 text-gray-900"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  Trending
+                </button>
+                <button
+                  onClick={() => setSortMode("featured")}
+                  className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
+                    sortMode === "featured"
+                      ? "bg-gray-200 text-gray-900"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  Featured
+                </button>
+                <button
+                  onClick={() => setSortMode("for-you")}
+                  className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
+                    sortMode === "for-you"
+                      ? "bg-gray-200 text-gray-900"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  For You
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2">
+                {/* Desktop: Toggle sidebar button */}
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className="p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-all"
+                >
+                  <SlidersHorizontal className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`p-2 rounded-lg transition-all ${
+                    viewMode === "grid"
+                      ? "bg-gray-200 text-gray-900"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                  }`}
+                >
+                  <Grid className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode("list")}
+                  className={`p-2 rounded-lg transition-all ${
+                    viewMode === "list"
+                      ? "bg-gray-200 text-gray-900"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                  }`}
+                >
+                  <List className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </motion.div>
 
@@ -563,38 +586,57 @@ export default function GalleryPage() {
 
       <Footer />
 
-      {/* Mobile Filter Overlay (Full Screen) */}
+      {/* Mobile Filter Sidebar (Slide-in from Left - eBay Style) */}
       <AnimatePresence>
         {showMobileFilterOverlay && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-white lg:hidden overflow-y-auto"
-          >
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">Filter</h2>
-              <button
-                onClick={() => setShowMobileFilterOverlay(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowMobileFilterOverlay(false)}
+              className="fixed inset-0 z-40 bg-black/30 lg:hidden"
+            />
             
-            <div className="p-4">
-              <FilterContent />
-            </div>
+            {/* Slide-in Sidebar */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed left-0 top-0 bottom-0 z-50 w-[75%] max-w-sm bg-white lg:hidden overflow-y-auto shadow-2xl"
+            >
+              <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between z-10">
+                <h2 className="text-xl font-semibold text-gray-900">Filter</h2>
+              </div>
+              
+              <div className="p-4">
+                <FilterContent />
+              </div>
 
-            <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
-              <button
-                onClick={handleShowResults}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all"
-              >
-                Show {filteredArtworks.length} Results
-              </button>
-            </div>
-          </motion.div>
+              <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
+                <button
+                  onClick={handleShowResults}
+                  className="w-full py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+                >
+                  Show {filteredArtworks.length} Results
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Floating X Button (Sticky on Right of Sidebar) */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={() => setShowMobileFilterOverlay(false)}
+              className="fixed top-4 z-50 w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all lg:hidden"
+              style={{ left: "calc(75% - 20px)", maxWidth: "calc(384px - 20px)" }}
+            >
+              <X className="w-5 h-5 text-white" />
+            </motion.button>
+          </>
         )}
       </AnimatePresence>
 
