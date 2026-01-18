@@ -301,14 +301,8 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           animate="center"
           exit="exit"
           transition={{
-            enter: {
-              x: { type: "tween", duration: 0.4, ease: "easeInOut" },
-              opacity: { duration: 0.4, ease: "easeInOut" },
-            },
-            exit: {
-              x: { type: "tween", duration: 0.3, ease: "easeInOut" },
-              opacity: { duration: 0.3, ease: "easeInOut" },
-            },
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.5 },
           }}
           className="absolute inset-0"
         >
