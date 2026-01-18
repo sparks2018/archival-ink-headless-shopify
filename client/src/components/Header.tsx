@@ -138,12 +138,14 @@ export default function Header() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="font-playfair text-lg md:text-3xl font-bold text-white tracking-wide">
-                  Archival<span className="text-purple-400">Ink</span>
-                </span>
-                <span className="font-playfair text-xs md:text-base text-white/80 ml-1.5 md:ml-2 tracking-widest uppercase">
-                  Gallery
-                </span>
+                <picture>
+                  <source srcSet="/archival-ink-gallery-logo.webp" type="image/webp" />
+                  <img 
+                    src="/archival-ink-gallery-logo.png" 
+                    alt="Archival Ink Gallery" 
+                    className="h-8 md:h-12 w-auto"
+                  />
+                </picture>
               </motion.div>
             </Link>
 

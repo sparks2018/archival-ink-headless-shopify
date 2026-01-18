@@ -223,21 +223,18 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? 300 : -300,
       opacity: 0,
-      scale: 1.1,
     }),
     center: {
       zIndex: 1,
       x: 0,
       opacity: 1,
-      scale: 1,
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? -300 : 300,
       opacity: 0,
-      scale: 0.9,
     }),
   };
 
@@ -273,9 +270,8 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.5 },
-            scale: { duration: 0.5 },
+            x: { type: "tween", duration: 1.2, ease: "easeInOut" },
+            opacity: { duration: 1.5, ease: "easeInOut" },
           }}
           className="absolute inset-0"
         >
