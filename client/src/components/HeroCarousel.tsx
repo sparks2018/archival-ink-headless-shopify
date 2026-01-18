@@ -21,6 +21,46 @@ interface HeroSlide {
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: "1",
+    title: "Apotheosis of Hope",
+    artist: "Michael Divine",
+    artistSlug: "michael-divine",
+    image: "/michael_divine_enhanced.png",
+    category: "Gallery Collection"
+  },
+  {
+    id: "2",
+    title: "Sacred Geometry Lion",
+    artist: "Luke Brown",
+    artistSlug: "luke-brown",
+    image: "/luke_brown_enhanced.png",
+    category: "Gallery Collection"
+  },
+  {
+    id: "3",
+    title: "Pink Bubble Portrait",
+    artist: "Hans Haveron",
+    artistSlug: "hans-haveron",
+    image: "/hans_haveron_enhanced.png",
+    category: "Gallery Collection"
+  },
+  {
+    id: "4",
+    title: "Anatomical Consciousness",
+    artist: "Alex Grey",
+    artistSlug: "alex-grey",
+    image: "/alex_grey_enhanced.png",
+    category: "Gallery Collection"
+  },
+  {
+    id: "5",
+    title: "Divine Feminine",
+    artist: "Christopher Pugliese",
+    artistSlug: "christopher-pugliese",
+    image: "/christopher_pugliese_enhanced.png",
+    category: "Gallery Collection"
+  },
+  {
+    id: "6",
     title: "Apotheosis of Hope 1",
     artist: "Michael Divine",
     artistSlug: "michael-divine",
@@ -28,7 +68,7 @@ const HERO_SLIDES: HeroSlide[] = [
     category: "Visionary Art"
   },
   {
-    id: "2",
+    id: "7",
     title: "Golden Lion",
     artist: "Luke Brown",
     artistSlug: "luke-brown",
@@ -36,7 +76,7 @@ const HERO_SLIDES: HeroSlide[] = [
     category: "Psychedelic Art"
   },
   {
-    id: "3",
+    id: "8",
     title: "Bicycle Day",
     artist: "Alex Grey",
     artistSlug: "alex-grey",
@@ -44,7 +84,7 @@ const HERO_SLIDES: HeroSlide[] = [
     category: "Visionary Art"
   },
   {
-    id: "4",
+    id: "9",
     title: "Divine Feminine",
     artist: "Christopher Pugliese",
     artistSlug: "christopher-pugliese",
