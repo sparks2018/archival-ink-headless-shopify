@@ -130,7 +130,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="glass border-b border-white/10">
         <div className="container">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-14 md:h-20">
             {/* Logo */}
             <Link href="/">
               <motion.div
@@ -138,10 +138,10 @@ export default function Header() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="font-playfair text-2xl md:text-3xl font-bold text-white tracking-wide">
+                <span className="font-playfair text-lg md:text-3xl font-bold text-white tracking-wide">
                   Archival<span className="text-purple-400">Ink</span>
                 </span>
-                <span className="font-playfair text-sm md:text-base text-white/80 ml-2 tracking-widest uppercase">
+                <span className="font-playfair text-xs md:text-base text-white/80 ml-1.5 md:ml-2 tracking-widest uppercase">
                   Gallery
                 </span>
               </motion.div>

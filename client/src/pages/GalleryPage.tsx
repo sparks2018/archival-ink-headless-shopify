@@ -240,6 +240,36 @@ export default function GalleryPage() {
         </div>
       </div>
 
+      {/* Theme Filter (Mobile Only) */}
+      <div className="mb-6 md:hidden">
+        <button
+          className="flex items-center justify-between w-full mb-4 text-gray-700 hover:text-gray-900 transition-colors"
+        >
+          <span className="font-medium">Genre</span>
+          <span className="text-sm">▼</span>
+        </button>
+        <div className="space-y-2">
+          {THEMATIC_CATEGORIES.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedThematicCategory(category.id)}
+              className={`w-full px-3 py-2 rounded-lg text-sm text-left transition-all ${
+                selectedThematicCategory === category.id
+                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {category.label}
+              {thematicCounts[category.id] !== undefined && (
+                <span className="ml-1.5 text-xs opacity-70">
+                  ({thematicCounts[category.id]})
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Artist Filter */}
       <div className="mb-6">
         <button
@@ -367,12 +397,12 @@ export default function GalleryPage() {
             </div>
           </motion.div>
 
-          {/* Thematic Categories (Secondary Filter) */}
+          {/* Thematic Categories (Secondary Filter) - Hidden on Mobile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mb-4"
+            className="mb-4 hidden md:block"
           >
             <div className="flex items-center gap-2 mb-2">
               <span className="text-gray-700 text-xs font-semibold">Theme:</span>
@@ -406,36 +436,38 @@ export default function GalleryPage() {
             transition={{ delay: 0.4 }}
             className="mb-6"
           >
-            {/* Universal Filter Button Row (All Screen Sizes) */}
-            <div className="flex items-center justify-between gap-3 mb-4">
-              {/* Purple Hamburger/X Button + All Filters Label */}
-              <button
-                onClick={() => {
-                  if (window.innerWidth < 750) {
-                    setShowMobileFilterOverlay(true);
-                  } else {
-                    setShowFilters(true);
-                  }
-                }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-300 hover:border-purple-500 transition-all"
-              >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
-                  <SlidersHorizontal className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-sm font-medium text-gray-900">All Filters</span>
-              </button>
+            {/* Universal Filter Button Row (Sticky on Mobile) */}
+            <div className="sticky top-0 z-30 bg-white pb-3 mb-4 md:static md:pb-0">
+              <div className="flex items-center justify-between gap-3">
+                {/* Purple Hamburger Button (Compact on Mobile) */}
+                <button
+                  onClick={() => {
+                    if (window.innerWidth < 750) {
+                      setShowMobileFilterOverlay(true);
+                    } else {
+                      setShowFilters(true);
+                    }
+                  }}
+                  className="flex items-center gap-2 px-2 py-1.5 md:px-3 md:py-2 rounded-lg bg-white border border-gray-300 hover:border-purple-500 transition-all"
+                >
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
+                    <SlidersHorizontal className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                  </div>
+                  <span className="text-xs md:text-sm font-medium text-gray-900">All Filters</span>
+                </button>
 
-              {/* Sort Dropdown (Mobile) */}
-              <select
-                value={sortMode}
-                onChange={(e) => setSortMode(e.target.value as SortMode)}
-                className="px-3 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:border-purple-500 transition-all md:hidden"
-              >
-                <option value="browse">Sort: Best Match</option>
-                <option value="trending">Sort: Trending</option>
-                <option value="featured">Sort: Featured</option>
-                <option value="for-you">Sort: For You</option>
-              </select>
+                {/* Sort Dropdown (Mobile, Compact) */}
+                <select
+                  value={sortMode}
+                  onChange={(e) => setSortMode(e.target.value as SortMode)}
+                  className="px-2 py-1.5 md:px-3 md:py-2 rounded-lg border border-gray-300 text-xs md:text-sm font-medium text-gray-900 bg-white focus:outline-none focus:border-purple-500 transition-all md:hidden"
+                >
+                  <option value="browse">Sort: Best Match</option>
+                  <option value="trending">Sort: Trending</option>
+                  <option value="featured">Sort: Featured</option>
+                  <option value="for-you">Sort: For You</option>
+                </select>
+              </div>
             </div>
 
             {/* Desktop: Sort Tabs & View Controls */}
