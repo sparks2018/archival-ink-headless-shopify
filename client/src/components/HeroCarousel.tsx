@@ -140,24 +140,41 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
   const [touchEnd, setTouchEnd] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [pauseTimeout, setPauseTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [kenBurnsDirection, setKenBurnsDirection] = useState({ x: 0, y: 0 });
+
+  // Generate random Ken Burns direction for each slide
+  const generateKenBurnsDirection = useCallback(() => {
+    const directions = [
+      { x: -3, y: -2 }, // top-left
+      { x: 3, y: -2 },  // top-right
+      { x: -3, y: 2 },  // bottom-left
+      { x: 3, y: 2 },   // bottom-right
+      { x: 0, y: -3 },  // top-center
+      { x: 0, y: 3 },   // bottom-center
+    ];
+    return directions[Math.floor(Math.random() * directions.length)];
+  }, []);
 
   const heroSlides = HERO_SLIDES;
 
   const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    setKenBurnsDirection(generateKenBurnsDirection());
     onSlideChange?.();
-  }, [heroSlides.length, onSlideChange]);
+  }, [heroSlides.length, onSlideChange, generateKenBurnsDirection]);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setKenBurnsDirection(generateKenBurnsDirection());
     onSlideChange?.();
-  }, [heroSlides.length, onSlideChange]);
+  }, [heroSlides.length, onSlideChange, generateKenBurnsDirection]);
 
   const goToSlide = (index: number) => {
     setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
+    setKenBurnsDirection(generateKenBurnsDirection());
     onSlideChange?.();
   };
 
@@ -238,6 +255,20 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
     }),
   };
 
+  // Ken Burns effect variants for the image
+  const kenBurnsVariants = {
+    initial: {
+      scale: 1,
+      x: 0,
+      y: 0,
+    },
+    animate: (direction: { x: number; y: number }) => ({
+      scale: 0.94,
+      x: direction.x,
+      y: direction.y,
+    }),
+  };
+
   const currentSlideData = heroSlides[currentSlide];
 
   const handleViewArtistClick = () => {
@@ -270,12 +301,26 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "tween", duration: 1.2, ease: "easeInOut" },
+            x: { 
+              type: "tween", 
+              duration: direction > 0 ? 1.2 : 0.6, // Exit 2x faster (0.6s), enter normal (1.2s)
+              ease: "easeInOut" 
+            },
             opacity: { duration: 1.5, ease: "easeInOut" },
           }}
           className="absolute inset-0"
         >
-          <div className="absolute inset-0">
+          <motion.div 
+            className="absolute inset-0"
+            custom={kenBurnsDirection}
+            variants={kenBurnsVariants}
+            initial="initial"
+            animate="animate"
+            transition={{
+              duration: 9,
+              ease: "linear",
+            }}
+          >
             <picture>
               <source media="(max-width: 767px)" type="image/webp" srcSet={currentSlideData.mobileImageWebP} />
               <source media="(max-width: 767px)" srcSet={currentSlideData.mobileImage} />
@@ -287,7 +332,7 @@ export default function HeroCarousel({ onSlideChange }: HeroCarouselProps) {
               />
             </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-          </div>
+          </motion.div>
 
           <div className="relative h-full flex items-end pb-20">
             <div className="container px-8">
