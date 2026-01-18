@@ -6,7 +6,7 @@ import { useAuth } from "../hooks/useAuth";
 export function EmailCaptureManager() {
   const [showPopup, setShowPopup] = useState(false);
   const [popupTrigger, setPopupTrigger] = useState<"cart" | "engagement">("engagement");
-  const { items } = useCart();
+  const { cart } = useCart();
   const { isAuthenticated } = useAuth();
 
   // Track if user has already seen the popup
@@ -22,7 +22,7 @@ export function EmailCaptureManager() {
     if (isAuthenticated || hasSeenPopup) return;
 
     // Cart/Wishlist trigger: Show popup 60 seconds after adding item
-    if (items.length > previousCartLength) {
+    if (cart.length > previousCartLength) {
       setPopupTrigger("cart");
       const timer = setTimeout(() => {
         setShowPopup(true);
@@ -31,8 +31,8 @@ export function EmailCaptureManager() {
       return () => clearTimeout(timer);
     }
 
-    setPreviousCartLength(items.length);
-  }, [items.length, previousCartLength, isAuthenticated, hasSeenPopup]);
+    setPreviousCartLength(cart.length);
+  }, [cart.length, previousCartLength, isAuthenticated, hasSeenPopup]);
 
   useEffect(() => {
     // Don't show popup if user is authenticated or has already seen it
@@ -41,14 +41,14 @@ export function EmailCaptureManager() {
     // Engagement trigger: Show popup after 60 seconds of browsing
     const timer = setTimeout(() => {
       // Only show if cart is empty (otherwise cart trigger takes precedence)
-      if (items.length === 0) {
+      if (cart.length === 0) {
         setPopupTrigger("engagement");
         setShowPopup(true);
       }
     }, 60000); // 60 seconds
 
     return () => clearTimeout(timer);
-  }, [isAuthenticated, hasSeenPopup, items.length]);
+  }, [isAuthenticated, hasSeenPopup, cart.length]);
 
   const handleClose = () => {
     setShowPopup(false);
@@ -75,7 +75,7 @@ export function EmailCaptureManager() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
         email, 
-        cartItems: items,
+        cartItems: cart,
         trigger: popupTrigger 
       }),
     }).catch(console.error);
