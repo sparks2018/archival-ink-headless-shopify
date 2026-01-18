@@ -72,7 +72,7 @@ export default function GalleryPage() {
   // Detect if desktop (show sidebar by default on desktop)
   useEffect(() => {
     const checkIfDesktop = () => {
-      setShowFilters(window.innerWidth >= 760); // Custom 760px breakpoint
+      setShowFilters(window.innerWidth >= 750); // Custom 750px breakpoint
     };
     checkIfDesktop();
     window.addEventListener("resize", checkIfDesktop);
@@ -406,11 +406,17 @@ export default function GalleryPage() {
             transition={{ delay: 0.4 }}
             className="mb-6"
           >
-            {/* Mobile: Filter + Sort Row */}
-            <div className="flex items-center justify-between gap-3 md:hidden mb-4">
-              {/* All Filters Button (Purple Circle + Text) */}
+            {/* Universal Filter Button Row (All Screen Sizes) */}
+            <div className="flex items-center justify-between gap-3 mb-4">
+              {/* Purple Hamburger/X Button + All Filters Label */}
               <button
-                onClick={() => setShowMobileFilterOverlay(true)}
+                onClick={() => {
+                  if (window.innerWidth < 750) {
+                    setShowMobileFilterOverlay(true);
+                  } else {
+                    setShowFilters(true);
+                  }
+                }}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-300 hover:border-purple-500 transition-all"
               >
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
@@ -419,11 +425,11 @@ export default function GalleryPage() {
                 <span className="text-sm font-medium text-gray-900">All Filters</span>
               </button>
 
-              {/* Sort Dropdown */}
+              {/* Sort Dropdown (Mobile) */}
               <select
                 value={sortMode}
                 onChange={(e) => setSortMode(e.target.value as SortMode)}
-                className="px-3 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:border-purple-500 transition-all"
+                className="px-3 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:border-purple-500 transition-all md:hidden"
               >
                 <option value="browse">Sort: Best Match</option>
                 <option value="trending">Sort: Trending</option>
@@ -514,16 +520,30 @@ export default function GalleryPage() {
             {/* Desktop Filters Sidebar */}
             <AnimatePresence>
               {showFilters && (
-                <motion.aside
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="hidden lg:block w-64 flex-shrink-0"
-                >
-                  <div className="sticky top-24">
-                    <FilterContent />
-                  </div>
-                </motion.aside>
+                <>
+                  <motion.aside
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="hidden lg:block w-full max-w-[236px] flex-shrink-0"
+                  >
+                    <div className="sticky top-24">
+                      <FilterContent />
+                    </div>
+                  </motion.aside>
+                  
+                  {/* Floating X Button for Desktop Sidebar */}
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={() => setShowFilters(false)}
+                    className="hidden lg:block fixed top-24 left-[220px] z-50 w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
+                  >
+                    <X className="w-5 h-5 text-white" />
+                  </motion.button>
+                </>
               )}
             </AnimatePresence>
 
@@ -605,34 +625,35 @@ export default function GalleryPage() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed left-0 top-0 bottom-0 z-50 w-[75%] max-w-sm bg-white lg:hidden overflow-y-auto shadow-2xl"
+              className="fixed left-0 top-0 bottom-0 z-50 w-[50%] max-w-xs bg-white lg:hidden overflow-y-auto shadow-2xl"
             >
-              <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between z-10">
-                <h2 className="text-xl font-semibold text-gray-900">Filter</h2>
+              <div className="sticky top-0 bg-white border-b border-gray-200 p-3 flex items-center justify-between z-10">
+                <h2 className="text-lg font-semibold text-gray-900">Filter</h2>
               </div>
               
-              <div className="p-4">
+              <div className="p-3 text-sm">
                 <FilterContent />
               </div>
 
-              <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
+              <div className="sticky bottom-0 bg-white border-t border-gray-200 p-3">
                 <button
                   onClick={handleShowResults}
-                  className="w-full py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+                  className="w-full py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-base hover:shadow-lg hover:shadow-purple-500/50 transition-all"
                 >
                   Show {filteredArtworks.length} Results
                 </button>
               </div>
             </motion.div>
 
-            {/* Floating X Button (Sticky on Right of Sidebar) */}
+            {/* Floating X Button (Top Right of Sidebar - Mobile) */}
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setShowMobileFilterOverlay(false)}
-              className="fixed top-4 z-50 w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all lg:hidden"
-              style={{ left: "calc(75% - 20px)", maxWidth: "calc(384px - 20px)" }}
+              className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all"
+              style={{ left: "calc(50% - 48px)" }}
             >
               <X className="w-5 h-5 text-white" />
             </motion.button>
